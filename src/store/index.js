@@ -17,13 +17,17 @@ export default new Vuex.Store({
       avatar: ''
     },
     categories:[],
-    registrationLoginFailure: false
+    registrationLoginFailure: false,
+    loggedIn: false
 
   },
 
   getters: {
     returnUser(state){
       return state.user
+    },
+    returnLoggedIn(state){
+      return state.loggedIn
     }
   },
 
@@ -34,7 +38,8 @@ export default new Vuex.Store({
 
       state.user.email = payload.response.data.email,
       state.user.name = payload.response.data.last_name,
-      state.user.avatar = payload.user.pic
+      state.user.avatar = payload.user.pic,
+      state.loggedIn = true
     },
 
     loginSuccess(state, payload){
@@ -43,7 +48,8 @@ export default new Vuex.Store({
 
       state.user.email = payload.response.email,
       state.user.name = payload.response.last_name,
-      state.user.avatar = payload.user.pic
+      state.user.avatar = payload.user.pic,
+      state.loggedIn = true
     },
 
     registrationFailure(state){

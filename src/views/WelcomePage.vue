@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex-column justify-content-center align-items-center">
-    <NavbarComponent/>
-    <WelcomePageComponent/>
+    <NavbarComponent loggedIn="loggedInUser"/>
+    <WelcomePageComponent loggedIn="loggedInUser"/>
   </div>
 </template>
 
@@ -9,7 +9,17 @@
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import WelcomePageComponent from '../components/WelcomePageComponent.vue';
 export default {
-    components: { NavbarComponent, WelcomePageComponent }
+    components: { NavbarComponent, WelcomePageComponent },
+
+
+    computed:{
+        loggedInUser(){
+            return this.$store.getters.returnUser
+        }
+    },
+    mounted(){
+        this.loggedInUser
+    },
 }
 </script>
 

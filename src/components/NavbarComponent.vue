@@ -1,6 +1,22 @@
 <template>
   <div class="navbar d-flex text-center justify-content-center align-items-center ">
-    <p>BridgeLabs Onboarding Task - Register, Login, Logout Flow</p>
+   <section>
+     <p>BridgeLabs Onboarding Task - Frontend</p>
+   </section>
+
+   <section>
+      <div v-if="loggedIn"> 
+        <button @click.prevent="showReg" class="register px-4">Register</button>
+        <button @click.prevent="showLog" class="login px-4">Login</button>
+      </div>
+
+      <div v-else>
+        
+
+
+      </div>
+   </section>
+
   </div>
 </template>
 
@@ -13,6 +29,11 @@ data(){
     }
 },
 
+computed:{
+  loggedIn(){
+    return this.$store.getters.returnLoggedIn
+  }
+}, 
 mounted(){
 
 },

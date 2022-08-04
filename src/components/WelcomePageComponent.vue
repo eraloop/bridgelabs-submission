@@ -2,8 +2,8 @@
     <div class="welcome-page container justify-content-center align-items-center  mx-auto my-5 py-5  shadow-lg ">
 
        <div class="container justify-content-center align-items-center text-center my-auto py-auto">
-            <h2>welcome {{loggedInUser.name}}</h2>
-            <h6>Email: {{loggedInUser.email}}</h6>
+            <h2>welcome {{loggedIn.name}}</h2>
+            <h6>Email: {{loggedIn.email}}</h6>
 
             <section class="my-3">
                 <button class="submit-btn col-3" @click.prevent="logoutUser" >Loggout</button>
@@ -17,19 +17,23 @@
 
 export default {
 
-computed:{
-    loggedInUser(){
-        return this.$store.getters.returnUser
+// computed:{
+//     loggedInUser(){
+//         return this.$store.getters.returnUser
+//     }
+// },
+// mounted(){
+//     this.loggedInUser
+// },
+    props:{
+        loggedIn
+    },
+    
+    methods: {
+        logoutUser(){
+            this.$store.dispatch("logoutUser")
+        }
     }
-},
-mounted(){
-    this.loggedInUser
-},
-methods: {
-    logoutUser(){
-        this.$store.dispatch("logoutUser")
-    }
-}
 
 }
 </script>
