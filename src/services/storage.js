@@ -7,6 +7,7 @@ const TOKEN_KEY = 'tokens'
  * accessed through this instance.
 **/
 const TokenService = {
+  
   saveToken (Token) {
     localStorage.setItem(TOKEN_KEY, Token)
   },

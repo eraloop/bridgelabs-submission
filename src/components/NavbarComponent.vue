@@ -1,21 +1,22 @@
 <template>
-  <div class="navbar d-flex text-center justify-content-center align-items-center ">
-   <section>
+  <div class="navbar ">
+   <div class="container d-flex  justify-content-between align-items-center ">
+    <section>
      <p>BridgeLabs Onboarding Task - Frontend</p>
    </section>
 
    <section>
-      <div v-if="loggedIn"> 
-        <button @click.prevent="showReg" class="register px-4">Register</button>
-        <button @click.prevent="showLog" class="login px-4">Login</button>
+      <div v-if="!loggedIn" >  
+        <a href="/" class="px-3"><button class="filled px-4">Register</button></a>
+        <a href="/login"><button class="outline px-4">Login</button></a>
       </div>
 
       <div v-else>
-        
-
-
+        <span>romanricakam@gmail.com</span>
+        <button @click.prevent="logout" class="filled px-4">Logout</button>
       </div>
    </section>
+   </div>
 
   </div>
 </template>
@@ -39,7 +40,9 @@ mounted(){
 },
 
 methods:{
-
+  logoutUser(){
+    this.$store.dispatch("logoutUser")
+  }
 }
 
 }

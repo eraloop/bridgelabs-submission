@@ -19,28 +19,28 @@ button{
 
 }
 
-button.register{
+button.filled{
     background: #04126e;
     border-radius: 5px;
     padding: 7px;
     color: #fff;
 }
 
-button.login{
+button.outline{
     border-radius: 5px;
     padding: 7px;
     color: #04126e;
     /* border: 1px solid #04126e; */
 }
 
-button.submit-btn{
+button.filled{
     background: #04126e;
     border-radius: 5px;
     padding: 7px;
     color: #fff;
 }
 
-button.submit-btn:focus{
+button.filled:focus{
     outline: none;
 }
 

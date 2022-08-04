@@ -14,11 +14,6 @@
                     <p class="">Join with Google</p>
                 </button>
             </section>
-            <!-- <section class="action-btn d-flex align-items-center justify-content-center text-center pt-3 pb-2">
-                <button @click.prevent="showReg" class="register px-4">Register</button>
-                <section class="d-flex align-items-center justify-content-center text-center px-5 "> <hr> <p>Or</p> <hr> </section>
-                <button @click.prevent="showLog" class="login px-4">Login</button>
-            </section> -->
 
             <div class="log-form-section d-flex align-items-center justify-content-center mx-auto py-5">
                 <form action="">
@@ -33,7 +28,7 @@
                     </div>
 
                     <div class="py-1">
-                       <button @click.prevent="loginUser"  class="submit-btn col-12" type="submit" >Login</button>
+                       <button @click.prevent="loginUser"  class="filled col-12" type="submit" >Login</button>
                     </div>
                 </form>
             </div>
@@ -47,7 +42,6 @@ export default {
 
     data(){
         return{
-
             logform:{
                 email: '',
                 password: ''
