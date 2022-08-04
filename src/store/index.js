@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import {UserService} from '../services/user'
-import {CategoryService} from '../services/user'
+import {CrudService} from '../services/categories'
 
 import { TokenService } from '../services/storage'
 
@@ -18,6 +18,7 @@ export default new Vuex.Store({
       name: '',
       avatar: ''
     },
+
     categories:[],
     registrationLoginFailure: false,
     loggedIn: false
@@ -25,12 +26,15 @@ export default new Vuex.Store({
   },
 
   getters: {
+
     returnUser(state){
       return state.user
     },
+
     returnLoggedIn(state){
       return state.loggedIn
     }
+    
   },
 
   mutations: {
@@ -71,10 +75,6 @@ export default new Vuex.Store({
           router.push('/home')
           return true
         } catch (e) {
-          // if (e instanceof AuthenticationError) {
-          //   // commit('loginError', { errorCode: e.errorCode, errorMessage: e.message })
-          //   console.log("yes the is an error that is returned from the request ")
-          // }
           return false
         }
       },
@@ -128,7 +128,7 @@ export default new Vuex.Store({
       async create({ commit }, payload) {
 
         try {
-          const response = await CategoryService.create(payload)
+          const response = await CrudService.create(payload)
 
           if((response.status === 200)){
             commit('createCategorySuccess', {response, payload})
@@ -145,7 +145,7 @@ export default new Vuex.Store({
       async read({ commit }, user) {
 
         try {
-          const response = await CategoryService.read(user)
+          const response = await CrudService.read(user)
 
           if((response.status === 200)){
             commit('registrationSuccess', {response, user})
@@ -162,7 +162,7 @@ export default new Vuex.Store({
       async update({ commit }, user) {
 
         try {
-          const response = await CategoryService.update(user)
+          const response = await CrudService.update(user)
 
           if((response.status === 200)){
             commit('registrationSuccess', {response, user})
@@ -178,7 +178,7 @@ export default new Vuex.Store({
 
       async delete({ commit }, user) {
         try {
-          const response = await CategoryService.delete(user)
+          const response = await CrudService.delete(user)
 
           if((response.status === 200)){
             commit('registrationSuccess', {response, user})

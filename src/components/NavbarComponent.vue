@@ -13,7 +13,7 @@
 
       <div v-else>
         <span>romanricakam@gmail.com</span>
-        <button @click.prevent="logout" class="filled px-4">Logout</button>
+        <button @click.prevent="logoutUser" class="filled px-4">Logout</button>
       </div>
    </section>
    </div>

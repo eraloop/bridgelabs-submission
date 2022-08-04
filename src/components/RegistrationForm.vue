@@ -1,17 +1,19 @@
 <template>
   <div class="d-flex justify-content-center align-items-center mx-auto">
     <div class="form-region shadow-lg my-4">
-        <div class="info-section d-flex-column align-items-center justify-content-center px-5 py-5">
-            <h1 class="pt-5">BridgeLabs Onboarding Task</h1>
-            <h5>Login, Register, Logout</h5>
-            <p>This task is to create a working registration, login aand logout flow.</p>
+        <div class="info-section container d-flex-column align-items-center justify-content-center px-5 py-5">
+            <div class="my-5">
+                <h1 class="pt-5">BridgeLabs Onboarding Task</h1>
+                <h5>FrontEnd - login, register, logout, file upload, google oauth</h5>
+                <p>This task is to create a working registration, login aand logout flow.</p>
+            </div>
         </div>
 
         <div class="form-section d-flex-column justify-content-center align-items-center  px-4">
-            <section class="google-btn d-flex align-items-center justify-content-center pt-4 pb-2">
-                <button class="d-flex align-items-center justify-content-center text-center px-5 ">
-                    <img src="../../static/images/google-brands.svg" alt=""  height="20px" width="20px">
-                    <p class="">Join with Google</p>
+            <section class="google-btn  d-flex align-items-center justify-content-center pt-4 pb-2">
+                <button @click.prevent="googleOAuth" class="d-flex align-items-center outline justify-content-center text-center px-5 py-2">
+                    <span><img src="../../static/images/google-brands.svg" alt=""  height="20px" width="20px"></span>
+                    <span class="px-3 text-primary">Join with Google</span>
                 </button>
             </section>
 

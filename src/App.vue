@@ -56,12 +56,6 @@ button.outline{
     /* border: 1px solid #04126e; */
 }
 
-button.filled{
-    background: #04126e;
-    border-radius: 5px;
-    padding: 7px;
-    color: #fff;
-}
 
 button.filled:focus{
     outline: none;

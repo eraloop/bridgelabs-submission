@@ -5,17 +5,49 @@
             <!-- <h2>welcome {{loggedIn.name}}</h2>
             <h6>Email: {{loggedIn.email}}</h6> -->
 
-            <section class="my-3">
-                <button class="submit-btn col-3" @click.prevent="logoutUser" >Loggout</button>
-            </section>
+       </div>
+
+       <div class="container d-flex-column text-center align-items-center juustify-content-center ">
+        <section>
+            <h4>View and Manage Categories</h4>
+        </section>
+
+        <section>
+
+            <vuetable ref="vuetable"
+                api-url="table"
+                :fields="['name', 'description', 'actions']"
+                data-path=""
+                pagination-path=""
+                :api-mode="false"
+                :data="table"
+            ></vuetable>
+
+        </section>
        </div>
 
     </div>
 </template>
 
 <script>
+import Vuetable from 'vuetable-2'
 
 export default {
+
+    components: {
+        Vuetable
+    },
+
+    data(){
+        return{
+            table:[
+                {
+                    name: 'first',
+                    description: "ththtjk"
+                }
+            ]
+        }
+    },
 
 // computed:{
 //     loggedInUser(){
