@@ -1,0 +1,65 @@
+
+.form-region{
+    height: 85vh;
+    width: 90%;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-gap: 1em;
+
+}
+
+button{
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding: 5px;
+
+}
+
+button.register{
+    background: #04126e;
+    border-radius: 5px;
+    padding: 7px;
+    color: #fff;
+}
+
+button.login{
+    border-radius: 5px;
+    padding: 7px;
+    color: #04126e;
+    /* border: 1px solid #04126e; */
+}
+
+button.submit-btn{
+    background: #04126e;
+    border-radius: 5px;
+    padding: 7px;
+    color: #fff;
+}
+
+button.submit-btn:focus{
+    outline: none;
+}
+
+.info-section{
+    background: #ddd;
+    border-radius: 20px 0px 0px 20px;
+}
+
+input{
+    border: 1px solid #04126e;
+    color: #04126e;
+    outline: none;
+    border-radius: 5px;
+    width: 450px;
+    padding: 7px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
