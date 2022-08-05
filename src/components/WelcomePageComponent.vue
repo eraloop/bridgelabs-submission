@@ -7,25 +7,22 @@
 
        </div>
 
-       <div class="container d-flex-column text-center align-items-center juustify-content-center ">
-        <section>
+       <div class="container d-flex-column   align-items-center juustify-content-center ">
+        <section class="text-center">
             <h4>View and Manage Categories</h4>
         </section>
 
-        <section>
-
+        <section class="px-4">
             <vuetable ref="vuetable"
-                api-url="table"
                 :fields="['name', 'description', 'actions']"
                 data-path=""
                 pagination-path=""
                 :api-mode="false"
-                :data="table"
-            ></vuetable>
-
+                :data="tableData.data"
+            >
+            </vuetable>
         </section>
        </div>
-
     </div>
 </template>
 
@@ -40,9 +37,6 @@ export default {
 
     data(){
         return{
-            // table:[
-               
-            // ]
         }
     },
 
@@ -50,13 +44,14 @@ export default {
         // loggedInUser(){
         //     return this.$store.getters.returnUser
         // },
-        table(){
+        tableData(){
             return this.$store.getters.returnCategoryValues
         }
     },
     mounted(){
-        // this.loggedInUser,
-        // this.table()
+        this.loggedInUser,
+        this.tableData()
+        
     },
 
     methods: {
@@ -70,7 +65,6 @@ export default {
 
 .welcome-page{
     width: 70vh;
-    height: 60vh;
     border-radius: 20px;
 }
 
