@@ -19,7 +19,7 @@
                     </div>
                     <div class="py-1">
                         <label for="password">Description</label><br/>
-                        <textarea v-model="catform.desciption" type="text" placeholder="Say something about the category" name="desciption" cols="47" rows="3"></textarea>
+                        <textarea v-model="catform.description" type="text" placeholder="Say something about the category" name="desciption" cols="47" rows="3"></textarea>
                     </div>
 
                     <div class="py-1">
@@ -72,10 +72,10 @@ export default {
         },
 
         createCategory(){
-            this.catform.created_at = new Date('YYYY-MM-DDTHH:mm:ss.sssZ');
+            this.catform.created_at = new Date().toISOString();
             console.log(this.catform.created_at)
             console.log(this.catform)
-            // this.$store.dispatch("createCategory", this.catform)
+            this.$store.dispatch("create", this.catform)
             // this.regform = {}
         },
         

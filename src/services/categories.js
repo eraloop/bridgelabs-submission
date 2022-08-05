@@ -3,14 +3,14 @@ import ApiService from './api'
 const CrudService = {
 
   create: async function (payload) {
-    const requestData = {
+    const header = {
       method: 'POST',
       url: 'https://simplor.herokuapp.com/api/category/create',
       data: payload
     }
 
     try {
-      const response = await ApiService.customRequest(requestData)
+      const response = await ApiService.customRequest(header)
       // returning the response to the vuex store tobe saved and used to verify routes
       return response.data
     } catch (error) {
@@ -19,13 +19,14 @@ const CrudService = {
   },
 
   read : async function () {
-    const registrationData = {
+    const header = {
       method: 'GET',
-      url: 'https://simplor.herokuapp.com/api/user/register',
+      url: 'https://simplor.herokuapp.com/api/category/categories',
     }
 
     try {
-      const response = await ApiService.customRequest(registrationData)
+      console.log("read request triggered")
+      const response = await ApiService.customRequest(header)
       return response
     } catch (error) {
       return error
@@ -33,13 +34,13 @@ const CrudService = {
   },
 
   update : async function (payload) {
-      const requestData = {
+      const header = {
         method: 'PUT',
         url: `https://simplor.herokuapp.com/api/category/update/${payload.id}`,
       }
   
       try {
-        const response = await ApiService.customRequest(requestData)
+        const response = await ApiService.customRequest(header)
         return response
       } catch (error) {
         return error
@@ -47,13 +48,13 @@ const CrudService = {
   },
   
   delete : async function (payload) {
-    const requestData = {
+    const header = {
       method: 'DELETE',
       url: `https://simplor.herokuapp.com/api/category/delete/${payload.id}`,
     }
 
     try {
-      const response = await ApiService.customRequest(requestData)
+      const response = await ApiService.customRequest(header)
       return response
     } catch (error) {
       return error
@@ -62,3 +63,4 @@ const CrudService = {
 }
 
 export default CrudService
+export {CrudService}

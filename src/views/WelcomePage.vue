@@ -17,9 +17,17 @@ export default {
             return this.$store.getters.returnUser
         }
     },
+
     mounted(){
-        this.loggedInUser
+        this.loggedInUser,
+        console.log("welcome page dispatch action")
+        this.$store.dispatch("read")
+        
+        
     },
+    methods:{
+     
+    }
 }
 </script>
 

@@ -5,6 +5,13 @@
      <p>BridgeLabs Onboarding Task - Frontend</p>
    </section>
 
+   <div>
+        <ul>
+          <li><a href="/create">Create Category</a></li>
+          <!-- <li><a href="/create">Create Category</a></li> -->
+        </ul>
+    </div>
+
    <section>
       <div v-if="!loggedIn" >  
         <a href="/" class="px-3"><button class="filled px-4">Register</button></a>
@@ -59,6 +66,22 @@ methods:{
     align-items: center ;
     justify-content: center;
     text-align: center;
+}
+
+ul li{
+  list-style: none;
+  text-decoration: none;
+  color: white;
+}
+
+ul li:hover{
+  color: #3d75f7;
+  padding: 5px;
+  border-radius: 5px;
+}
+ul li a{
+  text-decoration: none;
+  color: white;
 }
 
 

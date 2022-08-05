@@ -40,29 +40,27 @@ export default {
 
     data(){
         return{
-            table:[
-                {
-                    name: 'first',
-                    description: "ththtjk"
-                }
-            ]
+            // table:[
+               
+            // ]
         }
     },
 
-// computed:{
-//     loggedInUser(){
-//         return this.$store.getters.returnUser
-//     }
-// },
-// mounted(){
-//     this.loggedInUser
-// },
-    // props:{
-    //     loggedIn
-    // },
+    computed:{
+        // loggedInUser(){
+        //     return this.$store.getters.returnUser
+        // },
+        table(){
+            return this.$store.getters.returnCategoryValues
+        }
+    },
+    mounted(){
+        // this.loggedInUser,
+        // this.table()
+    },
 
     methods: {
-        
+       
     }
 
 }

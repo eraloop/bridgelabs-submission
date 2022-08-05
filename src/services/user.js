@@ -75,4 +75,5 @@ const UserService = {
 }
 
 export default UserService
+export {UserService}
 

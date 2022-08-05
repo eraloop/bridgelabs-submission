@@ -33,8 +33,12 @@ export default new Vuex.Store({
 
     returnLoggedIn(state){
       return state.loggedIn
+    },
+
+    returnCategoryValues(state){
+      return state.categories
     }
-    
+
   },
 
   mutations: {
@@ -60,7 +64,12 @@ export default new Vuex.Store({
 
     registrationFailure(state){
       state.registrationLoginFailure = true
+    },
+
+    categoryFetchSuccess(state, payload){
+      state.categories = payload
     }
+
   },
   actions: {
 
@@ -129,10 +138,9 @@ export default new Vuex.Store({
 
         try {
           const response = await CrudService.create(payload)
-
+          console.log(response)
           if((response.status === 200)){
-            commit('createCategorySuccess', {response, payload})
-            // router.push('/home')
+            commit('createCategorySuccess')
             console.log("store response from create category endpoint",response, payload)
             return true
           }
@@ -142,15 +150,13 @@ export default new Vuex.Store({
         }
       },
 
-      async read({ commit }, user) {
+      async read({ commit }) {
 
         try {
-          const response = await CrudService.read(user)
-
-          if((response.status === 200)){
-            commit('registrationSuccess', {response, user})
-            // router.push('/home')
-            console.log("store response from read category endpoint",response, user)
+          const response = await CrudService.read()
+          if(response.status === 200){
+            commit('categoryFetchSuccess', response)
+            console.log("store response from read category endpoint",response)
             return true
           }
         
@@ -164,12 +170,10 @@ export default new Vuex.Store({
         try {
           const response = await CrudService.update(user)
 
-          if((response.status === 200)){
-            commit('registrationSuccess', {response, user})
-            router.push('/home')
-            console.log("store response from update category endpoint",response, user)
-            return true
-          }
+          commit('registrationSuccess', {response, user})
+          router.push('/home')
+          console.log("store response from update category endpoint",response, user)
+          return true
         
         } catch (e) {
           return false
