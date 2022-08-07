@@ -10,7 +10,7 @@
                     <h5>Add a new category</h5>
                 </section>
 
-                <form action="">
+                <form action="POST" enctype="multipart/form-data">
                     <div class="py-1">
                         <label for="name">Name</label><br/>
                         <input v-model="catform.name" class="" type="text" name="name"  placeholder="John" >

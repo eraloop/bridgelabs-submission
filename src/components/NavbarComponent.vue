@@ -20,8 +20,9 @@
       </div>
 
       <div v-else>
-        <span>romanricakam@gmail.com</span>
+        <span>{{loggedInUser.email}}</span>
         <button @click.prevent="logoutUser" class="filled px-4">Logout</button>
+        
       </div>
    </section>
    </div>
@@ -41,6 +42,10 @@ data(){
 computed:{
   loggedIn(){
     return this.$store.getters.returnLoggedIn
+  },
+
+  loggedInUser(){
+    return this.$store.getters.returnUser
   }
 }, 
 mounted(){
