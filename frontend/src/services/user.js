@@ -24,6 +24,7 @@ const UserService = {
       // returning the response to the vuex store tobe saved and used to verify routes
       return response.data
     } catch (error) {
+      console.group(error)
       return error
     }
   },

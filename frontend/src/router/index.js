@@ -6,22 +6,8 @@ import LoginPage from '../views/LoginPage.vue'
 import CreateCategories from '../views/CreateCategories.vue'
 import WelcomePage from '../views/WelcomePage.vue'
 
-Vue.use(VueRouter)
 
-  // router.beforeEach((to, from, next) => {
-  //   store.dispatch('fetchAccessToken');
-  //   if (to.fullPath === '/categories') {
-  //     if (!store.state.accessToken) {
-  //       next('/login');
-  //     }
-  //   }
-  //   if (to.fullPath === '/welcome') {
-  //     if (store.state.accessToken) {
-  //       next('/login');
-  //     }
-  //   }
-  //   next();
-  // });
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -52,5 +38,21 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   // store.dispatch('fetchAccessToken');
+//   if (to.fullPath === '/create') {
+//     if (store.state.loggedIn === false) {
+//       next('/login');
+//     }
+//   }
+//   if (to.fullPath === '/home') {
+//     if (store.state.loggedIn === false) {
+//       next('/login');
+//     }
+//   }
+//   next();
+// }
+// );
 
 export default router

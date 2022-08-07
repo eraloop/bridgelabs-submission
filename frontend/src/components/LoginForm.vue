@@ -9,7 +9,17 @@
             </div>
         </div>
 
-        <div class="form-section d-flex-column justify-content-center align-items-center  px-4 my-5 py-5">
+        <div class="form-section d-flex-column justify-content-center align-items-center mx-auto  px-4 my-5 py-5">
+
+            <section v-if="invalidForm" class=" col-12 mx-auto bg-danger text-center text-white">
+                <p class="p-2">Email or password not provided</p>
+            </section>
+
+            <section v-if="logginError.status === 401" class=" col-12 mx-auto bg-danger text-center text-white">
+                <p>{{logginError.message}}</p>
+                <p>Please verify your credentials</p>
+            </section>
+
             <section class="google-btn  d-flex align-items-center justify-content-center pt-4 ">
                <h4>Login</h4>
             </section>
@@ -41,12 +51,20 @@ export default {
 
     data(){
         return{
+            invalidForm: false,
             logform:{
                 email: '',
                 password: ''
             }
         }
     },
+
+    computed:{
+        logginError(){
+            return this.$store.getters.returnLoginError
+        }
+    },
+
 
     mounted(){
 
@@ -55,8 +73,18 @@ export default {
     methods:{
 
         loginUser(){
-            this.$store.dispatch("loginUser", this.logform)
-            this.logForm = {}
+
+            if(this.logform.email === '' || this.logform === ''){
+                this.invalidForm = true
+
+                setTimeout(function(){
+                    this.invalidForm = false
+                }, 2000)
+                return false
+            }else{
+                this.$store.dispatch("loginUser", this.logform)
+                this.logForm = {}
+            }
         }
         
     }

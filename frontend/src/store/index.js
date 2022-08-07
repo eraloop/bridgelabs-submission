@@ -6,6 +6,7 @@ import {UserService} from '../services/user'
 import {CrudService} from '../services/categories'
 
 import { TokenService } from '../services/storage'
+import { AxiosError } from 'axios'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,11 @@ export default new Vuex.Store({
     categories:[],
     registrationLoginFailure: false,
     loggedIn: false,
-    categoryCreated: false
+    categoryCreated: false,
+    loginError: {
+      message: "",
+      status: ""
+    }
 
   },
 
@@ -44,6 +49,10 @@ export default new Vuex.Store({
 
     returnItemForUpdate: (state) => (id) => {
       return state.categories.find(cat => cat.id === id)
+    },
+     
+    returnLoginError(state){
+      return state.loginError
     }
 
   },
@@ -85,23 +94,35 @@ export default new Vuex.Store({
       state.categories.filter(cat => {
         return cat.id !== item
       })
+    },
+
+    loginError(state, payload){
+      state.loginError.message = payload.response.data.detail,
+      state.loginError.status = payload.response.status
     }
 
   },
   actions: {
 
-      async loginUser({ commit }, user) {
-        commit('loginRequest')
+      async loginUser({commit}, user) {
         try {
+
           const response = await UserService.login(user)
-          commit('loginSuccess', { response, user})
-          console.log("login response from the store",response, user)
-  
-          // Redirect the user to the page he first tried to visit or to the home view token
-          router.push('/home')
-          return true
+
+          if(response instanceof AxiosError){
+            console.log(response)
+            commit("loginError", response)
+            return false
+          }
+          if(!(response.token === '')){
+            commit('loginSuccess', { response, user})
+            console.log("login response from the store",response, user)
+            // Redirect the user to the page he first tried to visit or to the home view token
+            router.push('/home')
+          }
+          
         } catch (e) {
-          return false
+          return e
         }
       },
   
@@ -116,20 +137,29 @@ export default new Vuex.Store({
             return
           }
 
+          if(response instanceof AxiosError){
+            console.log(response)
+            commit("registrationError", response)
+          }
+
           const loginData = {
             email: user.email,
             password: user.password
           }
 
           const response2 = await UserService.login(loginData)
-          TokenService.saveToken(response2.data.token)
-          TokenService.saveRefreshToken(response2.data.refresh)
-          TokenService.saveAccessToken(response2.data.access)
 
-          console.log("login after register", response2)
-          commit('registrationSuccess', {response, user})
-          router.push('/home')
-          console.log("store response from register endpoint",response, user)
+          if(response2.status === 200){
+              TokenService.saveToken(response2.data.token)
+              TokenService.saveRefreshToken(response2.data.refresh)
+              TokenService.saveAccessToken(response2.data.access)
+
+              console.log("login after register", response2)
+              commit('registrationSuccess', {response, user})
+              router.push('/home')
+              console.log("store response from register endpoint",response, user)
+          }
+          
         
         } catch (e) {
           return false
@@ -188,7 +218,7 @@ export default new Vuex.Store({
           const response = await CrudService.update(item)
 
           commit('updateSuccess', response)
-          router.push('/home')
+          // router.push('/home')
           console.log("store response from update category endpoint",response, item)
           return true
         
