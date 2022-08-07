@@ -7,8 +7,8 @@
 
    <div>
         <ul class="d-flex align-item-center justify-content-between">
-          <li class="px-2"><a href="/home">Home</a></li>
-          <li class="px-2"><a href="/create">Create Category</a></li>
+          <li  v-if="loggedIn" class="px-2"><a href="/home">Home</a></li>
+          <li v-if="loggedIn" class="px-2"><a href="/create">Create Category</a></li>
           <!-- <li><a href="/create">Create Category</a></li> -->
         </ul>
     </div>
