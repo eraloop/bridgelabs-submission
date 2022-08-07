@@ -21,7 +21,8 @@ export default new Vuex.Store({
 
     categories:[],
     registrationLoginFailure: false,
-    loggedIn: false
+    loggedIn: false,
+    categoryCreated: false
 
   },
 
@@ -37,6 +38,9 @@ export default new Vuex.Store({
 
     returnCategoryValues(state){
       return state.categories
+    },
+    returnCategoryCreated(state){
+      return state.categoryCreated
     }
 
   },
@@ -68,6 +72,16 @@ export default new Vuex.Store({
 
     categoryFetchSuccess(state, payload){
       state.categories = payload
+    },
+
+    createCategorySuccess(state){
+      state.categoryCreated = true
+    },
+
+    deleteSuccess(state, item){
+      state.categories.filter(cat => {
+        return cat.id !== item
+      })
     }
 
   },
@@ -180,14 +194,12 @@ export default new Vuex.Store({
         }
       },
 
-      async delete({ commit }, user) {
+      async delete({ commit }, item) {
         try {
-          const response = await CrudService.delete(user)
-
-          if((response.status === 200)){
-            commit('registrationSuccess', {response, user})
-            router.push('/home')
-            console.log("store response from delete category endpoint",response, user)
+          const response = await CrudService.delete(item)
+          if((response.status === 204)){
+            commit('deleteSuccess', item)
+            console.log("store response from delete category endpoint",response, item)
             return true
           }
         

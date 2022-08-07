@@ -6,8 +6,9 @@
    </section>
 
    <div>
-        <ul>
-          <li><a href="/create">Create Category</a></li>
+        <ul class="d-flex align-item-center justify-content-between">
+          <li class="p-2"><a href="/home">Home</a></li>
+          <li class="p-2"><a href="/create">Create Category</a></li>
           <!-- <li><a href="/create">Create Category</a></li> -->
         </ul>
     </div>
@@ -72,17 +73,25 @@ ul li{
   list-style: none;
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 ul li:hover{
-  color: #3d75f7;
-  padding: 5px;
+  color: white;
+  background: #3d75f7;
   border-radius: 5px;
 }
+
 ul li a{
   text-decoration: none;
   color: white;
 }
+
+ul li a:hover{
+  text-decoration: none;
+  color: white;
+}
+
 
 
 </style>

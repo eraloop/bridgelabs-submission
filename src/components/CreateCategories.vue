@@ -3,7 +3,9 @@
     <div class="form-region shadow-lg my-4 d-flex justify-content-center align-items-center  px-4">
 
             <div class="reg-form-section d-flex-column align-items-center justify-content-center mx-auto">
-
+                <section v-if="(categoryCreated && control)" class="bg-success m-2 text-center text-white">
+                    <p class="py-3">Category created successfully</p>
+                </section>
                 <section class="action-btn d-flex align-items-center justify-content-center text-center pt-3 pb-2">
                     <h5>Add a new category</h5>
                 </section>
@@ -28,6 +30,7 @@
                 </form>
             </div>
         </div>
+        {{categoryCreated}}
   </div>
 </template>
 
@@ -41,8 +44,14 @@ export default {
                name:"",
                image: "",
                description: "",
-            //    created_at: new DateTime.now()
             },
+            control: true
+        }
+    },
+
+    computed:{
+        categoryCreated(){
+            return this.$store.getters.returnCategoryCreated
         }
     },
 

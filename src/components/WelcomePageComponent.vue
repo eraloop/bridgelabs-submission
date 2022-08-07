@@ -23,8 +23,8 @@
 
                 <template slot="actions" scope="props">
                     <div class="table-button-container">
-                        <button class="btn btn-default" @click="onEditItem(props.rowData)"><img src="../../static/images/pen-to-square-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
-                        <button class="btn btn-danger" @click="onDeleteItem(props.rowData)"><img src="../../static/images/trash-can-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
+                        <button class="btn btn-default" @click.prevent="onEditItem(props.rowData)"><img src="../../static/images/pen-to-square-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
+                        <button class="btn btn-danger" @click.prevent="onDeleteItem(props.rowData)"><img src="../../static/images/trash-can-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
                     </div>
                 </template>
 
@@ -64,11 +64,11 @@ export default {
     methods: {
 
        onEditItem(item){
-        console.log(item)
+            this.$store.dispatch("update", item.id)
        },
 
        onDeleteItem(item){
-        console.log(item)
+            this.$store.dispatch("delete", item.id)
        }
     }
 
