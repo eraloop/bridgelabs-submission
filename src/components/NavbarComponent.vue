@@ -7,8 +7,8 @@
 
    <div>
         <ul class="d-flex align-item-center justify-content-between">
-          <li class="p-2"><a href="/home">Home</a></li>
-          <li class="p-2"><a href="/create">Create Category</a></li>
+          <li class="px-2"><a href="/home">Home</a></li>
+          <li class="px-2"><a href="/create">Create Category</a></li>
           <!-- <li><a href="/create">Create Category</a></li> -->
         </ul>
     </div>
@@ -20,7 +20,7 @@
       </div>
 
       <div v-else>
-        <span>{{loggedInUser.email}}</span>
+        <span class="px-2">{{loggedInUser.email}}</span>
         <button @click.prevent="logoutUser" class="filled px-4">Logout</button>
         
       </div>

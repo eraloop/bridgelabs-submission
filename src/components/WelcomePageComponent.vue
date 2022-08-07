@@ -99,6 +99,7 @@ export default {
         return{
             showModal: false,
             update:{
+                id: '',
                 name: '',
                 description: '',
                 image: ''
@@ -123,15 +124,12 @@ export default {
 
         updateItem(item){
             this.showModal = true
-            this.update.name = item.name,
-            this.update.description = item.description,
-            this.image = item.image
+            this.update = item
         }, 
 
         onEditItem(){
-                console.log(this.update)
-                // this.$store.dispatch("update", this.update)
-                // this.showModal = false
+            this.$store.dispatch("update", this.update)
+            this.showModal = false
         },
 
         onDeleteItem(item){

@@ -37,6 +37,7 @@ const CrudService = {
       const header = {
         method: 'PUT',
         url: `https://simplor.herokuapp.com/api/category/update/${payload.id}`,
+        data: payload
       }
   
       try {

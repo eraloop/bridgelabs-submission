@@ -182,14 +182,14 @@ export default new Vuex.Store({
         }
       },
 
-      async update({ commit }, user) {
+      async update({ commit }, item) {
 
         try {
-          const response = await CrudService.update(user)
+          const response = await CrudService.update(item)
 
-          commit('registrationSuccess', {response, user})
+          commit('updateSuccess', response)
           router.push('/home')
-          console.log("store response from update category endpoint",response, user)
+          console.log("store response from update category endpoint",response, item)
           return true
         
         } catch (e) {
