@@ -7,8 +7,8 @@
 
        </div>
 
-       <div class="container d-flex-column   align-items-center juustify-content-center ">
-        <section class="text-center">
+       <div class="container d-flex-column  text-center  align-items-center justify-content-center ">
+        <section class="text-center mb-4">
             <h4>View and Manage Categories</h4>
         </section>
 
@@ -20,6 +20,14 @@
                 :api-mode="false"
                 :data="tableData.data"
             >
+
+                <template slot="actions" scope="props">
+                    <div class="table-button-container">
+                        <button class="btn btn-default" @click="onEditItem(props.rowData)"><img src="../../static/images/pen-to-square-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
+                        <button class="btn btn-danger" @click="onDeleteItem(props.rowData)"><img src="../../static/images/trash-can-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
+                    </div>
+                </template>
+
             </vuetable>
         </section>
        </div>
@@ -41,21 +49,27 @@ export default {
     },
 
     computed:{
-        // loggedInUser(){
-        //     return this.$store.getters.returnUser
-        // },
+        loggedInUser(){
+            return this.$store.getters.returnUser
+        },
         tableData(){
             return this.$store.getters.returnCategoryValues
         }
     },
     mounted(){
         this.loggedInUser,
-        this.tableData()
-        
+        this.tableData
     },
 
     methods: {
-       
+
+       onEditItem(item){
+        console.log(item)
+       },
+
+       onDeleteItem(item){
+        console.log(item)
+       }
     }
 
 }
