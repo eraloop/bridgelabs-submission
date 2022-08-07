@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store/index'
+// import store from '../store/index'
 import RegistrationPage from '../views/RegistrationPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import CreateCategories from '../views/CreateCategories.vue'
@@ -39,19 +39,20 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  // store.dispatch('fetchAccessToken');
-  if (to.fullPath === '/create') {
-    if (store.state.loggedIn === false) {
-      next('/login');
-    }
-  }
-  if (to.fullPath === '/home') {
-    if (store.state.loggedIn === false) {
-      next('/login');
-    }
-  }
-  next();
-});
+// router.beforeEach((to, from, next) => {
+//   // store.dispatch('fetchAccessToken');
+//   if (to.fullPath === '/create') {
+//     if (store.state.loggedIn === false) {
+//       next('/login');
+//     }
+//   }
+//   if (to.fullPath === '/home') {
+//     if (store.state.loggedIn === false) {
+//       next('/login');
+//     }
+//   }
+//   next();
+// }
+// );
 
 export default router
