@@ -18,7 +18,6 @@ export default new Vuex.Store({
       name: '',
       avatar: ''
     },
-
     categories:[],
     registrationLoginFailure: false,
     loggedIn: false,
@@ -41,6 +40,10 @@ export default new Vuex.Store({
     },
     returnCategoryCreated(state){
       return state.categoryCreated
+    },
+
+    returnItemForUpdate: (state) => (id) => {
+      return state.categories.find(cat => cat.id === id)
     }
 
   },

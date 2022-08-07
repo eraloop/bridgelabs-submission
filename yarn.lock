@@ -2570,7 +2570,7 @@
     "browserslist" "^4.21.3"
     "semver" "7.0.0"
 
-"core-js@^3.8.3":
+"core-js@^3.6.5", "core-js@^3.8.3":
   "integrity" "sha512-0QTBSYSUZ6Gq21utGzkfITDylE8jWC9Ne1D2MrhvlsZBI1x39OdDIVbzSqtgMndIy6BlHxBXpMGqzZmnztg2rg=="
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.24.1.tgz"
   "version" "3.24.1"
@@ -6445,6 +6445,14 @@
     "hash-sum" "^2.0.0"
     "loader-utils" "^2.0.0"
 
+"vue-modal-service@^1.4.3":
+  "integrity" "sha512-YcTWHRRjjJHl54d9kt5JxQek9EEjgYr1dlg+zeBRp4ojbGVByIsWp53eKTUkTXc6GkFUf2IS19rnAxWm9tZPJQ=="
+  "resolved" "https://registry.npmjs.org/vue-modal-service/-/vue-modal-service-1.4.3.tgz"
+  "version" "1.4.3"
+  dependencies:
+    "core-js" "^3.6.5"
+    "vue" "^2.6.11"
+
 "vue-router@^3.5.1":
   "integrity" "sha512-x+/DLAJZv2mcQ7glH2oV9ze8uPwcI+H+GgTgTmb5I55bCgY3+vXWIsqbYUzbBSZnwFHEJku4eoaH/x98veyymQ=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.5.4.tgz"
@@ -6471,7 +6479,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@*", "vue@^2 || ^3.2.13", "vue@^2.0.0", "vue@^2.5.18", "vue@^2.6.14":
+"vue@*", "vue@^2 || ^3.2.13", "vue@^2.0.0", "vue@^2.5.18", "vue@^2.6.11", "vue@^2.6.14":
   "integrity" "sha512-ncwlZx5qOcn754bCu5/tS/IWPhXHopfit79cx+uIlLMyt3vCMGcXai5yCG5y+I6cDmEj4ukRYyZail9FTQh7lQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.8.tgz"
   "version" "2.7.8"
