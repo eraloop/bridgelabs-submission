@@ -51,7 +51,7 @@ const CrudService = {
   delete : async function (payload) {
     const header = {
       method: 'DELETE',
-      url: `https://simplor.herokuapp.com/api/category/delete/${payload.id}`,
+      url: `https://simplor.herokuapp.com/api/category/delete/${payload}`,
     }
 
     try {

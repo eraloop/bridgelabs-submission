@@ -49,7 +49,8 @@ computed:{
   }
 }, 
 mounted(){
-
+  this.loggedIn,
+  this.loggedInUser
 },
 
 methods:{

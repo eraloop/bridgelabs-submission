@@ -200,14 +200,12 @@ export default new Vuex.Store({
       async delete({ commit }, item) {
         try {
           const response = await CrudService.delete(item)
-          if((response.status === 204)){
             commit('deleteSuccess', item)
+            router.push('/home')
             console.log("store response from delete category endpoint",response, item)
-            return true
-          }
-        
+            return response
         } catch (e) {
-          return false
+          return e
         }
       },
   }

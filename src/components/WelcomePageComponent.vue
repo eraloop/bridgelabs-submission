@@ -1,7 +1,7 @@
 <template>
 
 <main>
-    <div class="container greeting justify-content-center align-items-center text-center mt-2 py-auto shadow-lg">
+    <div  v-if="loggedIn" class="container greeting justify-content-center align-items-center text-center mt-2 py-auto shadow-lg">
         <h4> Hello!! {{loggedInUser.name}} - Welcome</h4>
     </div>
     <div class="welcome-page container justify-content-center align-items-center  mx-auto my-5 py-5  shadow-lg ">
@@ -27,7 +27,7 @@
                 <template slot="actions" scope="props">
                     <div class="table-button-container">
                         <button class="btn btn-default" @click.prevent="updateItem(props.rowData)"><img src="../../static/images/pen-to-square-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
-                        <button class="btn btn-danger" @click.prevent="onDeleteItem(props.rowData)"><img src="../../static/images/trash-can-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
+                        <button class="btn btn-danger" @click="onDeleteItem(props.rowData)"><img src="../../static/images/trash-can-regular.svg" height="15px" width="15px"></button>&nbsp;&nbsp;
                     </div>
                 </template>
 
@@ -113,8 +113,12 @@ export default {
         },
         tableData(){
             return this.$store.getters.returnCategoryValues
-        }
+        },
+        loggedIn(){
+            return this.$store.getters.returnLoggedIn
+        },
     },
+
     mounted(){
         this.loggedInUser,
         this.tableData
@@ -134,8 +138,9 @@ export default {
 
         onDeleteItem(item){
             console.log(item)
-            // this.$store.dispatch("delete", item.id)
+            this.$store.dispatch("delete", item.id)
         },
+
 
         handleSelects(e) {
             const fileList = Array.prototype.slice.call(e.target.files);
@@ -188,5 +193,9 @@ button.submit-btn{
     height: 5vh;
     width: 100%;
     border-radius: 20px;
+}
+
+button:focus{
+    outline: none;
 }
 </style>
