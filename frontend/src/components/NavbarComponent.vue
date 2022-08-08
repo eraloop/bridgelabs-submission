@@ -50,12 +50,7 @@ computed:{
   }
 }, 
 mounted(){
-  this.loggedIn
   this.loggedInUser
-
-  // if(this.loggedIn){
-  //   this.currentUser = this.$store.getters.returnUser
-  // }
 },
 
 methods:{

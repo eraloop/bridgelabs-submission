@@ -20,23 +20,23 @@
                 <p>Please verify your credentials</p>
             </section>
 
-            <section class="google-btn  d-flex align-items-center justify-content-center pt-4 ">
-               <h4>Login</h4>
+            <section class="google-btn  d-flex align-items-center justify-content-center pt-4 mb-3 ">
+               <h3>Login</h3>
             </section>
 
             <div class="log-form-section d-flex align-items-center justify-content-center mx-auto pb-5">
                 <form action="">
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="email">Email</label><br/>
                         <input v-model="logform.email" required type="email" name="email" placeholder="example@gmail.com">
                     </div>
                    
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="password">Password</label><br/>
                         <input v-model="logform.password" required type="password" name="password"  placeholder="...........">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                        <button @click.prevent="loginUser"  class="filled col-12" type="submit" >Login</button>
                     </div>
                 </form>

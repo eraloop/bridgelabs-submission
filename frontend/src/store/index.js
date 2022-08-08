@@ -40,11 +40,11 @@ export default new Vuex.Store({
     },
 
     returnLoggedIn(state){
-
-      if(!(TokenService.getToken === '')){
+      
+      if(!(TokenService.getToken() === '') && !(TokenService.getAccessToken() === '') ){
         return state.loggedIn = true
       }
-      
+
       return state.loggedIn = false
     },
 

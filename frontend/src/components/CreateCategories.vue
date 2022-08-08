@@ -6,25 +6,25 @@
                 <section v-if="(categoryCreated && control)" class="bg-success m-2 text-center text-white">
                     <p class="py-3">Category created successfully</p>
                 </section>
-                <section class="action-btn d-flex align-items-center justify-content-center text-center pt-3 pb-2">
+                <section class="action-btn d-flex align-items-center justify-content-center text-center mb-3 pt-3 pb-2">
                     <h5>Add a new category</h5>
                 </section>
 
                 <form action="POST" enctype="multipart/form-data">
-                    <div class="py-1">
+                    <div class="mb-3">
                         <label for="name">Name</label><br/>
                         <input v-model="catform.name" class="" type="text" name="name"  placeholder="John" >
                     </div>
-                    <div class="py-1">
+                    <div class="mb-3">
                         <label for="profilepicture">Profile Picture</label><br/>
                         <input  type="file" @change="handleSelects" accept="image/*" name="images" class=" mulitple">
                     </div>
-                    <div class="py-1">
+                    <div class="mb-3">
                         <label for="password">Description</label><br/>
                         <textarea v-model="catform.description" type="text" placeholder="Say something about the category" name="desciption" cols="47" rows="3"></textarea>
                     </div>
 
-                    <div class="py-1">
+                    <div class="mb-3">
                        <button @click.prevent="createCategory"  class="submit-btn col-12" type="submit" > Create</button>
                     </div>
                 </form>
