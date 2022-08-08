@@ -17,14 +17,21 @@ const UserService = {
     try {
       // ApiService.setHeader()
       const response = await ApiService.customRequest(requestData)
+
+      // construct a user object
+      const user = {
+        name : response.data.last_name,
+        email : response.data.email
+      }
       // saving the token and refresh token to the local storage 
-      TokenService.saveAccessToken(response.access)
-      TokenService.saveToken(response.token)
-      TokenService.saveRefreshToken(response.refresh)
+      TokenService.saveAccessToken(response.data.access)
+      TokenService.saveToken(response.data.token)
+      TokenService.saveRefreshToken(response.data.refresh)
+      // save current user 
+      TokenService.saveCurrentUser(user)
       // returning the response to the vuex store tobe saved and used to verify routes
       return response.data
     } catch (error) {
-      console.group(error)
       return error
     }
   },
@@ -57,19 +64,23 @@ const UserService = {
       const requestData = {
         method: 'POST',
         url: 'https://simplor.herokuapp.com/api/user/logout',
+        data:{
+          refresh_token: TokenService.getRefreshToken()
+        }
       }
   
       try {
         ApiService.setAuthHeader()
-        console.log(TokenService.getToken())
         const response = await ApiService.customRequest(requestData)
         // removing the token and refresh toke from the local storage 
         TokenService.removeToken()
+        TokenService.removeAccessToken()
+        TokenService.removeRefreshToken()
         ApiService.removeHeader()
         return response
 
       } catch (error) {
-        console.log(error)
+        return error
       }
   },
   

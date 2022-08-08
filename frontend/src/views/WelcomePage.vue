@@ -20,7 +20,6 @@ export default {
 
     mounted(){
         this.loggedInUser,
-        console.log("welcome page dispatch action")
         this.$store.dispatch("read")
         
         

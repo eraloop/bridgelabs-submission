@@ -23,7 +23,7 @@ p, small, div{
 
 
 .form-region{
-    height: 85vh;
+    height: 90vh;
     width: 90%;
     border-radius: 20px;
     border: none;
@@ -31,7 +31,6 @@ p, small, div{
     display: grid;
     grid-template-columns: 40% 60%;
     grid-gap: 1em;
-
 }
 
 button{

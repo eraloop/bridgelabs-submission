@@ -12,16 +12,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: '',
-    refreshToken: '',
-    user: {
-      email: '',
-      name: '',
-      avatar: ''
-    },
+
+    token: TokenService.getToken(),
+    accessToken: TokenService.getAccessToken(),
+    refreshToken: TokenService.getRefreshToken(),
+
+    user: TokenService.getCurrentUser(),
     categories:[],
     registrationLoginFailure: false,
-    loggedIn: false,
+    loggedIn: '',
     categoryCreated: false,
     loginError: {
       message: "",
@@ -37,7 +36,12 @@ export default new Vuex.Store({
     },
 
     returnLoggedIn(state){
-      return state.loggedIn
+
+      if(!(state.token === '')){
+        return state.loggedIn = true
+      }else{
+        return state.loggedIn = false
+      }
     },
 
     returnCategoryValues(state){
@@ -72,9 +76,9 @@ export default new Vuex.Store({
       state.token = payload.response.access,
       state.refreshToken = payload.response.refresh
 
-      state.user.email = payload.response.email,
-      state.user.name = payload.response.last_name,
-      state.user.avatar = payload.user.pic,
+      // state.user.email = payload.response.email,
+      // state.user.name = payload.response.last_name,
+      // state.user.avatar = payload.user.pic,
       state.loggedIn = true
     },
 
@@ -99,6 +103,14 @@ export default new Vuex.Store({
     loginError(state, payload){
       state.loginError.message = payload.response.data.detail,
       state.loginError.status = payload.response.status
+    },
+
+    loggoutSuccess(state){
+      state.loggedIn = false
+      state.user = {}
+      state.token = ''
+      state.accessToken = ''
+      state.refreshToken = ''
     }
 
   },
@@ -110,13 +122,12 @@ export default new Vuex.Store({
           const response = await UserService.login(user)
 
           if(response instanceof AxiosError){
-            console.log(response)
             commit("loginError", response)
             return false
           }
+          
           if(!(response.token === '')){
             commit('loginSuccess', { response, user})
-            console.log("login response from the store",response, user)
             // Redirect the user to the page he first tried to visit or to the home view token
             router.push('/home')
           }
@@ -129,6 +140,7 @@ export default new Vuex.Store({
       async registerUser({ commit }, user) {
 
         try {
+
           const response = await UserService.register(user)
 
           if(!(response.status === 200) || !(response.data.token === '')){
@@ -138,42 +150,33 @@ export default new Vuex.Store({
           }
 
           if(response instanceof AxiosError){
-            console.log(response)
             commit("registrationError", response)
+            return false
           }
-
-          const loginData = {
-            email: user.email,
-            password: user.password
-          }
-
-          const response2 = await UserService.login(loginData)
-
-          if(response2.status === 200){
-              TokenService.saveToken(response2.data.token)
-              TokenService.saveRefreshToken(response2.data.refresh)
-              TokenService.saveAccessToken(response2.data.access)
-
-              console.log("login after register", response2)
-              commit('registrationSuccess', {response, user})
-              router.push('/home')
-              console.log("store response from register endpoint",response, user)
-          }
-          
         
         } catch (e) {
           return false
         }
       },
 
-      async logoutUser() {
+      async logoutUser({commit}) {
         // logout function, makes a request the
         try {
 
-          const response = await UserService.logout()
-          console.log("response from logout ",response)
-          // router.push('/')
-          return true
+          if(!(TokenService.getRefreshToken === '')){
+            const response = await UserService.logout()
+            if(response.status === 200){
+              commit('loggoutSuccess')
+              TokenService.removeToken()
+              TokenService.removeAccessToken()
+              TokenService.removeRefreshToken()
+              router.push('/login')
+            }
+          }
+
+          commit("loggoutSuccess")
+          router.push('/login')
+          // return true
         } catch (e) {
           return false
         }
@@ -185,10 +188,8 @@ export default new Vuex.Store({
 
         try {
           const response = await CrudService.create(payload)
-          console.log(response)
           if((response.status === 200)){
             commit('createCategorySuccess')
-            console.log("store response from create category endpoint",response, payload)
             return true
           }
         
@@ -203,7 +204,6 @@ export default new Vuex.Store({
           const response = await CrudService.read()
           if(response.status === 200){
             commit('categoryFetchSuccess', response)
-            console.log("store response from read category endpoint",response)
             return true
           }
         
@@ -218,8 +218,6 @@ export default new Vuex.Store({
           const response = await CrudService.update(item)
 
           commit('updateSuccess', response)
-          // router.push('/home')
-          console.log("store response from update category endpoint",response, item)
           return true
         
         } catch (e) {
@@ -230,10 +228,8 @@ export default new Vuex.Store({
       async delete({ commit }, item) {
         try {
           const response = await CrudService.delete(item)
-            commit('deleteSuccess', item)
-            router.push('/home')
-            console.log("store response from delete category endpoint",response, item)
-            return response
+          commit('deleteSuccess', response)   
+          return response
         } catch (e) {
           return e
         }

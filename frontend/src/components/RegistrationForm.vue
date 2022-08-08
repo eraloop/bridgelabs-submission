@@ -1,3 +1,4 @@
+
 <template>
   <div class="d-flex justify-content-center align-items-center mx-auto">
     <div class="form-region shadow-lg my-4">
@@ -11,10 +12,13 @@
 
         <div class="form-section d-flex-column justify-content-center align-items-center  px-4">
             <section class="google-btn  d-flex align-items-center justify-content-center pt-4 pb-2">
-                <button @click.prevent="googleOAuth" class="d-flex align-items-center outline justify-content-center text-center px-5 py-2">
-                    <span><img src="../../static/images/google-brands.svg" alt=""  height="20px" width="20px"></span>
-                    <span class="px-3 text-primary">Join with Google</span>
+                <button class="d-flex align-items-center outline justify-content-center text-center px-5 py-2">
+                    <a :href="getGoogleUrl()" class="google-auth d-flex align-items-center outline justify-content-center text-center px-5 py-2">
+                        <span><img src="../../static/images/google-brands.svg" alt=""  height="20px" width="20px"></span>
+                        <span class="px-3 text-primary">Join with Google</span>
+                    </a>
                 </button>
+                    
             </section>
 
             <div  class="reg-form-section d-flex align-items-center justify-content-center mx-auto">
@@ -55,10 +59,14 @@
 </template>
 
 <script>
+
+// import {getGoogleUrl}  from '../utils/googleOauth';
 export default {
 
     data(){
         return{
+            from: '/',
+
             regform:{
                 fn: '',
                 ln: '',
@@ -97,12 +105,30 @@ export default {
         },
 
         registerUser(){
-            console.log(this.regform)
             this.$store.dispatch("registerUser", this.regform)
             this.regform = {}
         },
 
-
+        getGoogleUrl: () => {
+            const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
+        
+            const options = {
+            redirect_uri: process.env.VITE_GOOGLE_OAUTH_REDIRECT,
+            client_id: process.env.VITE_GOOGLE_OAUTH_CLIENT_ID,
+            access_type: 'offline',
+            response_type: 'code',
+            prompt: 'consent',
+            scope: [
+                'https://www.googleapis.com/auth/userinfo.profile',
+                'https://www.googleapis.com/auth/userinfo.email',
+            ].join(' '),
+            state: '/',
+            };
+        
+            const qs = new URLSearchParams(options);
+        
+            return `${rootUrl}?${qs.toString()}`;
+        }
         
     }
 }

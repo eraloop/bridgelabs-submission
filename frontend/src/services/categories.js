@@ -25,7 +25,6 @@ const CrudService = {
     }
 
     try {
-      console.log("read request triggered")
       const response = await ApiService.customRequest(header)
       return response
     } catch (error) {
