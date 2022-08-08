@@ -20,7 +20,6 @@
                 </button>
                     
             </section>
-            
 
             <div  class="reg-form-section d-flex align-items-center justify-content-center mx-auto">
                 <form action="">
@@ -106,13 +105,11 @@ export default {
         },
 
         registerUser(){
-            console.log(this.regform)
             this.$store.dispatch("registerUser", this.regform)
             this.regform = {}
         },
 
         getGoogleUrl: () => {
-            // console.log("testing google oauth function ", this.from)
             const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
         
             const options = {

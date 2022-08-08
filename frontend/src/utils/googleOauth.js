@@ -1,7 +1,6 @@
 
 const getGoogleUrl = (from) => {
 
-    console.log("testing google oauth function ", from)
     const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
   
     const options = {

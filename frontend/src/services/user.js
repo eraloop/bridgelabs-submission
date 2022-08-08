@@ -17,10 +17,18 @@ const UserService = {
     try {
       // ApiService.setHeader()
       const response = await ApiService.customRequest(requestData)
+
+      // construct a user object
+      const user = {
+        name : response.data.last_name,
+        email : response.data.email
+      }
       // saving the token and refresh token to the local storage 
       TokenService.saveAccessToken(response.data.access)
       TokenService.saveToken(response.data.token)
       TokenService.saveRefreshToken(response.data.refresh)
+      // save current user 
+      TokenService.saveCurrentUser(user)
       // returning the response to the vuex store tobe saved and used to verify routes
       return response.data
     } catch (error) {
@@ -63,7 +71,6 @@ const UserService = {
   
       try {
         ApiService.setAuthHeader()
-        console.log(TokenService.getToken())
         const response = await ApiService.customRequest(requestData)
         // removing the token and refresh toke from the local storage 
         TokenService.removeToken()
@@ -73,7 +80,7 @@ const UserService = {
         return response
 
       } catch (error) {
-        console.log(error)
+        return error
       }
   },
   

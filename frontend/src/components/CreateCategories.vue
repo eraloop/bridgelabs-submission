@@ -81,10 +81,8 @@ export default {
 
         createCategory(){
             this.catform.created_at = new Date().toISOString();
-            console.log(this.catform.created_at)
-            console.log(this.catform)
             this.$store.dispatch("create", this.catform)
-            // this.regform = {}
+            this.catform = {}
         },
         
     }

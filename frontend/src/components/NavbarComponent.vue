@@ -3,20 +3,19 @@
    <div class="container d-flex  justify-content-between align-items-center ">
     <section>
      <p>BridgeLabs Onboarding Task - Frontend</p>
-     {{loggedIn}}
    </section>
 
    <div>
       <ul class="d-flex align-item-center justify-content-between">
-        <li  v-if="loggedIn" class="px-2"><a href="/home">Home</a></li>
-        <li v-if="loggedIn" class="px-2"><a href="/create">Create Category</a></li>
+        <li  v-if="loggedIn" class="px-2"><router-link to="/home">Home</router-link></li>
+        <li v-if="loggedIn" class="px-2"><router-link to="/create">Create Category</router-link></li>
       </ul>
     </div>
 
    <section>
       <div v-if="!loggedIn" >  
-        <a href="/" class="px-3"><button class="filled px-4">Register</button></a>
-        <a href="/login"><button class="outline px-4">Login</button></a>
+        <router-link to="/" class="px-3"><button class="filled px-4">Register</button></router-link>
+        <router-link to="/login"><button class="outline px-4">Login</button></router-link>
       </div>
 
       <div v-else>

@@ -11,13 +11,17 @@ const TokenService = {
   saveToken (Token) {
     localStorage.setItem('token', Token)
   },
-  
+
   saveAccessToken (accessToken) {
     localStorage.setItem('accessToken', accessToken)
   },
 
   saveRefreshToken (refreshToken) {
     localStorage.setItem('refreshToken', refreshToken)
+  },
+
+  saveCurrentUser(user) {
+    localStorage.setItem('user', JSON.stringify(user))
   },
 
   getRefreshToken () {
@@ -31,6 +35,12 @@ const TokenService = {
   getAccessToken () {
     return localStorage.getItem('accessToken')
   },
+
+  getCurrentUser () {
+    return localStorage.getItem('user')
+  },
+
+  // remove tokens from storage
 
   removeToken () {
     localStorage.removeItem('token')
