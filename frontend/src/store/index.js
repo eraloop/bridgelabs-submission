@@ -12,10 +12,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
     token: TokenService.getToken(),
     accessToken: TokenService.getAccessToken(),
     refreshToken: TokenService.getRefreshToken(),
-    
+
     user: {
       email: '',
       name: '',
@@ -39,7 +40,12 @@ export default new Vuex.Store({
     },
 
     returnLoggedIn(state){
-      return state.loggedIn
+
+      if(!(TokenService.getToken === '')){
+        return state.loggedIn = true
+      }
+      
+      return state.loggedIn = false
     },
 
     returnCategoryValues(state){
@@ -101,6 +107,14 @@ export default new Vuex.Store({
     loginError(state, payload){
       state.loginError.message = payload.response.data.detail,
       state.loginError.status = payload.response.status
+    },
+
+    loggoutSuccess(state){
+      state.loggedIn = false
+      state.user = {}
+      state.token = ''
+      state.accessToken = ''
+      state.refreshToken = ''
     }
 
   },
@@ -168,13 +182,14 @@ export default new Vuex.Store({
         }
       },
 
-      async logoutUser() {
+      async logoutUser({commit}) {
         // logout function, makes a request the
         try {
-
           const response = await UserService.logout()
-          console.log("response from logout ",response)
-          // router.push('/')
+          if(response.status === 200){
+            commit('loggoutSuccess')
+            router.push('/login')
+          }
           return true
         } catch (e) {
           return false

@@ -3,14 +3,14 @@
    <div class="container d-flex  justify-content-between align-items-center ">
     <section>
      <p>BridgeLabs Onboarding Task - Frontend</p>
+     {{loggedIn}}
    </section>
 
    <div>
-        <ul class="d-flex align-item-center justify-content-between">
-          <li  v-if="loggedIn" class="px-2"><a href="/home">Home</a></li>
-          <li v-if="loggedIn" class="px-2"><a href="/create">Create Category</a></li>
-          <!-- <li><a href="/create">Create Category</a></li> -->
-        </ul>
+      <ul class="d-flex align-item-center justify-content-between">
+        <li  v-if="loggedIn" class="px-2"><a href="/home">Home</a></li>
+        <li v-if="loggedIn" class="px-2"><a href="/create">Create Category</a></li>
+      </ul>
     </div>
 
    <section>
@@ -20,10 +20,10 @@
       </div>
 
       <div v-else>
-        <span class="px-2">{{loggedInUser.email}}</span>
+        <span class="px-2">{{currentUser.email}}</span>
         <button @click.prevent="logoutUser" class="filled px-4">Logout</button>
-        
       </div>
+
    </section>
    </div>
 
@@ -31,11 +31,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
 
 data(){
     return{
-
+      currentUser: ''
     }
 },
 
@@ -49,14 +50,21 @@ computed:{
   }
 }, 
 mounted(){
-  this.loggedIn,
+  this.loggedIn
   this.loggedInUser
+
+  // if(this.loggedIn){
+  //   this.currentUser = this.$store.getters.returnUser
+  // }
 },
 
 methods:{
   logoutUser(){
     this.$store.dispatch("logoutUser")
-  }
+  },
+
+  ...mapGetters['loggedIn']
+
 }
 
 }

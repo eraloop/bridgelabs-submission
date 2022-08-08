@@ -56,6 +56,9 @@ const UserService = {
       const requestData = {
         method: 'POST',
         url: 'https://simplor.herokuapp.com/api/user/logout',
+        data:{
+          refresh_token: TokenService.getRefreshToken()
+        }
       }
   
       try {
@@ -64,6 +67,8 @@ const UserService = {
         const response = await ApiService.customRequest(requestData)
         // removing the token and refresh toke from the local storage 
         TokenService.removeToken()
+        TokenService.removeAccessToken()
+        TokenService.removeRefreshToken()
         ApiService.removeHeader()
         return response
 

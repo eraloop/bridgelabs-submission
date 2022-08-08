@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'tokens'
+// const TOKEN_KEY = 'tokens'
 
 /**
  * Manage the how Access Tokens are being stored and retrieved from storage.
@@ -9,35 +9,37 @@ const TOKEN_KEY = 'tokens'
 const TokenService = {
 
   saveToken (Token) {
-    console.log(Token)
-    localStorage.setItem(TOKEN_KEY, Token)
+    localStorage.setItem('token', Token)
   },
+  
   saveAccessToken (accessToken) {
-    console.log(accessToken)
-    localStorage.setItem(TOKEN_KEY, accessToken)
+    localStorage.setItem('accessToken', accessToken)
   },
 
   saveRefreshToken (refreshToken) {
-    console.log(refreshToken)
-    localStorage.setItem(TOKEN_KEY, refreshToken)
+    localStorage.setItem('refreshToken', refreshToken)
   },
 
   getRefreshToken () {
-    const refresh = localStorage.getItem(TOKEN_KEY.refreshToken)
-    console.log(refresh)
-    return refresh
+    return localStorage.getItem('refreshToken')
   },
 
   getToken () {
-    return localStorage.getItem(TOKEN_KEY.Token)
+    return localStorage.getItem('token')
   },
   
   getAccessToken () {
-    return localStorage.getItem(TOKEN_KEY.accessToken)
+    return localStorage.getItem('accessToken')
   },
 
   removeToken () {
-    localStorage.removeItem(TOKEN_KEY)
+    localStorage.removeItem('token')
+  },
+  removeAccessToken () {
+    localStorage.removeItem('acessToken')
+  },
+  removeRefreshToken () {
+    localStorage.removeItem('refreshToken')
   }
 
 }
