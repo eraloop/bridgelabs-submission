@@ -18,13 +18,12 @@ const UserService = {
       // ApiService.setHeader()
       const response = await ApiService.customRequest(requestData)
       // saving the token and refresh token to the local storage 
-      TokenService.saveAccessToken(response.access)
-      TokenService.saveToken(response.token)
-      TokenService.saveRefreshToken(response.refresh)
+      TokenService.saveAccessToken(response.data.access)
+      TokenService.saveToken(response.data.token)
+      TokenService.saveRefreshToken(response.data.refresh)
       // returning the response to the vuex store tobe saved and used to verify routes
       return response.data
     } catch (error) {
-      console.group(error)
       return error
     }
   },

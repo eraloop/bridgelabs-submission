@@ -9,18 +9,23 @@ const TOKEN_KEY = 'tokens'
 const TokenService = {
 
   saveToken (Token) {
+    console.log(Token)
     localStorage.setItem(TOKEN_KEY, Token)
   },
   saveAccessToken (accessToken) {
+    console.log(accessToken)
     localStorage.setItem(TOKEN_KEY, accessToken)
   },
 
   saveRefreshToken (refreshToken) {
+    console.log(refreshToken)
     localStorage.setItem(TOKEN_KEY, refreshToken)
   },
 
   getRefreshToken () {
-    return localStorage.getItem(TOKEN_KEY.refreshToken)
+    const refresh = localStorage.getItem(TOKEN_KEY.refreshToken)
+    console.log(refresh)
+    return refresh
   },
 
   getToken () {

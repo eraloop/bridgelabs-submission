@@ -12,8 +12,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: '',
-    refreshToken: '',
+    token: TokenService.getToken(),
+    accessToken: TokenService.getAccessToken(),
+    refreshToken: TokenService.getRefreshToken(),
+    
     user: {
       email: '',
       name: '',
