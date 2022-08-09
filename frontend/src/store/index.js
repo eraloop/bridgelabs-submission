@@ -37,11 +37,15 @@ export default new Vuex.Store({
 
     returnLoggedIn(state){
 
-      if(!(state.token === '')){
-        return state.loggedIn = true
-      }else{
-        return state.loggedIn = false
-      }
+      // if(!(state.token === '')){
+      //   return state.loggedIn = true
+      // }else{
+      //   return state.loggedIn = false
+      // }
+      // if((TokenService.getAccessToken() || state.token)){
+      //   return state.loggedIn = true
+      // }
+      return !!(TokenService.getAccessToken() || state.accessToken)
     },
 
     returnCategoryValues(state){
@@ -129,7 +133,7 @@ export default new Vuex.Store({
           if(!(response.token === '')){
             commit('loginSuccess', { response, user})
             // Redirect the user to the page he first tried to visit or to the home view token
-            router.push('/home')
+            router.go('/home')
           }
           
         } catch (e) {
@@ -145,7 +149,7 @@ export default new Vuex.Store({
 
           if(!(response.status === 200) || !(response.data.token === '')){
             commit("registrationFailure", response)
-            router.push("/login")
+            router.go("/login")
             return
           }
 
@@ -165,18 +169,15 @@ export default new Vuex.Store({
 
           if(!(TokenService.getRefreshToken === '')){
             const response = await UserService.logout()
+
             if(response.status === 200){
-              commit('loggoutSuccess')
               TokenService.removeToken()
               TokenService.removeAccessToken()
               TokenService.removeRefreshToken()
-              router.push('/login')
+              commit('loggoutSuccess')
+              router.go('/login')
             }
           }
-
-          commit("loggoutSuccess")
-          router.push('/login')
-          // return true
         } catch (e) {
           return false
         }

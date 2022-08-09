@@ -1,4 +1,3 @@
-// const TOKEN_KEY = 'tokens'
 
 /**
  * Manage the how Access Tokens are being stored and retrieved from storage.
@@ -43,13 +42,16 @@ const TokenService = {
   // remove tokens from storage
 
   removeToken () {
-    localStorage.removeItem('token')
+    // window.localStorage.removeItem('token')
+    window.localStorage.clear(); 
   },
   removeAccessToken () {
-    localStorage.removeItem('acessToken')
+    // window.localStorage.removeItem('acessToken')
+    window.localStorage.clear(); 
   },
   removeRefreshToken () {
-    localStorage.removeItem('refreshToken')
+    // window.localStorage.removeItem('refreshToken')
+    window.localStorage.clear(); 
   }
 
 }
