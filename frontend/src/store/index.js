@@ -12,7 +12,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    isAuth : false,
     token: TokenService.getToken(),
     accessToken: TokenService.getAccessToken(),
     refreshToken: TokenService.getRefreshToken(),
@@ -83,7 +83,8 @@ export default new Vuex.Store({
       // state.user.email = payload.response.email,
       // state.user.name = payload.response.last_name,
       // state.user.avatar = payload.user.pic,
-      state.loggedIn = true
+
+      state.obj = { ...state.obj, loggedIn: true }
     },
 
     registrationFailure(state){
@@ -133,8 +134,14 @@ export default new Vuex.Store({
           if(!(response.token === '')){
             commit('loginSuccess', { response, user})
             // Redirect the user to the page he first tried to visit or to the home view token
-            router.push('/home')
+            // router.push('/home')
+            // router.go("/home")
+            router.replace({ path: '/home' })
           }
+
+          // router.go('/home')
+          // router.push('/home')
+          router.go("/home")
           
         } catch (e) {
           return e

@@ -79,7 +79,8 @@ export default {
 
                 setTimeout(function(){
                     this.invalidForm = false
-                }, 2000)
+                }, 1500)
+
                 return false
             }else{
                 this.$store.dispatch("loginUser", this.logform)

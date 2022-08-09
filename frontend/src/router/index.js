@@ -52,6 +52,12 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }
   }
+
+  if (to.fullPath === '/login') {
+    if ((TokenService.getAccessToken())) {
+      next('/home');
+    }
+  }
   
   next();
 }

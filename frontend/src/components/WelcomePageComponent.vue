@@ -120,9 +120,12 @@ export default {
     },
 
     mounted(){
+        // window.location.reload(); 
         this.loggedInUser
         this.loggedIn
         this.tableData
+
+        
     },
 
     methods: {
