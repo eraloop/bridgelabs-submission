@@ -48,7 +48,14 @@ computed:{
     return this.$store.getters.returnUser
   }
 }, 
+
 mounted(){
+  this.loggedIn
+  this.loggedInUser
+},
+
+created(){
+  this.loggedIn
   this.loggedInUser
 },
 
