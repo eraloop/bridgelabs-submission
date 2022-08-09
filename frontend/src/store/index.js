@@ -133,7 +133,7 @@ export default new Vuex.Store({
           if(!(response.token === '')){
             commit('loginSuccess', { response, user})
             // Redirect the user to the page he first tried to visit or to the home view token
-            router.go('/home')
+            router.push('/home')
           }
           
         } catch (e) {
@@ -149,7 +149,7 @@ export default new Vuex.Store({
 
           if(!(response.status === 200) || !(response.data.token === '')){
             commit("registrationFailure", response)
-            router.go("/login")
+            router.push("/login")
             return
           }
 
