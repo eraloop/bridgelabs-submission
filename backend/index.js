@@ -5,7 +5,7 @@ const express = require("express")
 const bcrypt = require('bcrypt');
 const mongodb = require("mongodb")
 const cors = require("cors")
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
 const kill = require('kill-port')
 

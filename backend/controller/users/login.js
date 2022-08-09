@@ -7,7 +7,7 @@ const loginUser = async (req, res, next ) => {
 
     console.log("middleware passed, login routes reached")
 
-    // const { email , password } = req.body
+    const { email , password } = req.body
 
     // if(true){
     //     return Response.sendErrorResponse({
@@ -18,21 +18,21 @@ const loginUser = async (req, res, next ) => {
     // }
     
 
-    // acc = getUser(email)
+    acc = getUser(email)
 
-    // const hash = acc[0].password
-    // async function comparePassword(password, hash) {
-    //     const result = await bcrypt.compare(password, hash);
-    //     return result;
-    // }
+    const hash = acc[0].password
+    async function comparePassword(password, hash) {
+        const result = await bcrypt.compare(password, hash);
+        return result;
+    }
 
-    // if(comparePassword(password, hash)){
-    //     res.send("credentials match").status(202)
-    // }else{
-    //     res.send("credentials not valid").status(401)
-    // }
+    if(comparePassword(password, hash)){
+        res.send("credentials match").status(202)
+    }else{
+        res.send("credentials not valid").status(401)
+    }
 
-    // next()
+    next()
 }
 
 module.exports = loginUser

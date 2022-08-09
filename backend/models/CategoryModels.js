@@ -1,8 +1,10 @@
 
-const getDb = require('../utils/database').getDb
+const Role = require('../../utils/roles')
+const getDb = require('../../utils/database').getDb
 
-class UserSchema {
+class CategorySchema {
      constructor({name, email, phone, password, regionOfOrigin, division, subdivision}){
+      this.role = Role.USER,
       this.name = name,
       this.email = email,
       this.phone = phone,
@@ -19,14 +21,6 @@ class UserSchema {
     })
   }
 
-  // findUser(data){
-  //   const db = getDb()
-  //   db.collection('user').find({"username" : data}).then(result =>{
-  //     console.log(result)
-  //   })
-  // }
-
-
 }
 
-exports.UserSchema = UserSchema
+exports.CategorySchema = CategorySchema
