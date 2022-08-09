@@ -1,0 +1,26 @@
+{
+  "name": "google_oauth",
+  "version": "1.0.0",
+  "description": "google oauth setup ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eraloop/bridgelabs-submission.git"
+  },
+  "author": "eraloop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eraloop/bridgelabs-submission/issues"
+  },
+  "homepage": "https://github.com/eraloop/bridgelabs-submission#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-google-oauth": "^2.0.0"
+  }
+}
