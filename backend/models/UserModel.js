@@ -1,10 +1,8 @@
 
-const Role = require('../../utils/roles')
-const getDb = require('../../utils/database').getDb
+const getDb = require('../utils/database').getDb
 
 class UserSchema {
      constructor({name, email, phone, password, regionOfOrigin, division, subdivision}){
-      this.role = Role.USER,
       this.name = name,
       this.email = email,
       this.phone = phone,
