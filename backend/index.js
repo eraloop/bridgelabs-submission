@@ -5,20 +5,13 @@ const express = require("express")
 const bcrypt = require('bcrypt');
 const mongodb = require("mongodb")
 const cors = require("cors")
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
-const kill = require('kill-port')
-
 const port  = process.env.PORT
 
 // routes
-// normal user routes
-const userInfoRoutes = require('./routes/user/account/index')
-const userStoryRoutes = require('./routes/user/story/index')
-// contributor routes
-const contributorStoryRoutes = require('./routes/contributor/story/index')
-// admin routes
-const adminRoutes = require('./routes/admin/index')
+const users = require('./routes/user')
+const categories = require('./routes/categories')
 
 // db connection
 const { mongoConnect } = require('./utils/database')
@@ -34,10 +27,8 @@ app.use(cors({
     credentials: true
 }))
 
-app.use('/user', userInfoRoutes)
-app.use('/user', userStoryRoutes)
-app.use('/contributor', contributorStoryRoutes)
-app.use('/admin', adminRoutes)
+app.use('/user', users)
+app.use('/user', categories)
 
 
 mongoConnect(()=>{

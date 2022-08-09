@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const StoryModel = require('../../models/users/UserModel')
+const StoryModel = require('../../models/UserModel')
 const getDb = require('../../utils/database').getDb
 
 const becomeContributor = async (req, res, next)=>{
