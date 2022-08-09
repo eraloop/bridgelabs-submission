@@ -120,7 +120,8 @@ export default {
     },
 
     mounted(){
-        this.loggedInUser,
+        this.loggedInUser
+        this.loggedIn
         this.tableData
     },
 

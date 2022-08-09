@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 const gauthOption = {
-
   clientId: "585778916374-gqoboaih37s12pvmqhvvbija0dqphrqt.apps.googleusercontent.com",
   redirect_uri: "http://localhost:8000/api/oauth/google",
   access_type: 'offline',
@@ -24,6 +23,7 @@ const gauthOption = {
   prompt: 'consent'
 }
 
+// window.localStorage.clear(); 
 
 // make google-oauth module available for vuejs 
 Vue.use(GAuth, gauthOption)

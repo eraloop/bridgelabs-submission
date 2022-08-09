@@ -43,12 +43,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // store.dispatch('fetchAccessToken');
   if (to.fullPath === '/create') {
-    if (TokenService.getToken === '') {
+    if (!(TokenService.getAccessToken())) {
       next('/login');
     }
   }
   if (to.fullPath === '/home') {
-    if (TokenService.getToken === '') {
+    if (!(TokenService.getAccessToken())) {
       next('/login');
     }
   }

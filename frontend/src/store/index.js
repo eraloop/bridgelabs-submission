@@ -37,11 +37,15 @@ export default new Vuex.Store({
 
     returnLoggedIn(state){
 
-      if(!(state.token === '')){
-        return state.loggedIn = true
-      }else{
-        return state.loggedIn = false
-      }
+      // if(!(state.token === '')){
+      //   return state.loggedIn = true
+      // }else{
+      //   return state.loggedIn = false
+      // }
+      // if((TokenService.getAccessToken() || state.token)){
+      //   return state.loggedIn = true
+      // }
+      return !!(TokenService.getAccessToken() || state.accessToken)
     },
 
     returnCategoryValues(state){
