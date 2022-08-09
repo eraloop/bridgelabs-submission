@@ -13,6 +13,7 @@
     "dotenv": "^16.0.1",
     "register-service-worker": "^1.7.2",
     "vue": "^2.6.14",
+    "vue-google-oauth2": "^1.5.8",
     "vue-modal-service": "^1.4.3",
     "vue-router": "^3.5.1",
     "vuetable-2": "^2.0.0-beta.4",

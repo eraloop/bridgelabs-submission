@@ -6,7 +6,7 @@ let _db
 
 const mongoConnect = (callback) =>{
 
-    MongoClient.connect(config.databaseUrl).then( client=>{
+    MongoClient.connect(config.DATABASE_URL).then( client=>{
         console.log("connected")
         _db = client.db('heritage')
         callback()

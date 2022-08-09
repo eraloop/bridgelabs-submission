@@ -5,7 +5,7 @@
      <p>BridgeLabs Onboarding Task - Frontend</p>
    </section>
 
-   <div>
+    <div>
       <ul class="d-flex align-item-center justify-content-between">
         <li  v-if="loggedIn" class="px-2"><router-link to="/home">Home</router-link></li>
         <li v-if="loggedIn" class="px-2"><router-link to="/create">Create Category</router-link></li>
@@ -18,12 +18,12 @@
         <router-link to="/login"><button class="outline px-4">Login</button></router-link>
       </div>
 
-      <div v-else>
-        <span class="px-2">{{currentUser.email}}</span>
+      <div v-else >
+        <span class="px-2">{{loggedInUser.email}}</span>
         <button @click.prevent="logoutUser" class="filled px-4">Logout</button>
       </div>
-
    </section>
+
    </div>
 
   </div>
@@ -35,7 +35,7 @@ export default {
 
 data(){
     return{
-      currentUser: ''
+     
     }
 },
 
@@ -48,7 +48,14 @@ computed:{
     return this.$store.getters.returnUser
   }
 }, 
+
 mounted(){
+  this.loggedIn
+  this.loggedInUser
+},
+
+created(){
+  this.loggedIn
   this.loggedInUser
 },
 
@@ -56,9 +63,7 @@ methods:{
   logoutUser(){
     this.$store.dispatch("logoutUser")
   },
-
   ...mapGetters['loggedIn']
-
 }
 
 }

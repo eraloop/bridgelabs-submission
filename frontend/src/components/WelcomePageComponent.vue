@@ -2,7 +2,7 @@
 
 <main>
     <div  v-if="loggedIn" class="container greeting justify-content-center align-items-center text-center mt-2 py-auto shadow-lg">
-        <h4> Hello!! {{loggedInUser.name}} - Welcome</h4>
+        <h4> Hello!! - Welcome</h4>
     </div>
     <div class="welcome-page container justify-content-center align-items-center  mx-auto my-5 py-5  shadow-lg ">
 
@@ -120,8 +120,12 @@ export default {
     },
 
     mounted(){
-        this.loggedInUser,
+        // window.location.reload(); 
+        this.loggedInUser
+        this.loggedIn
         this.tableData
+
+        
     },
 
     methods: {
@@ -169,6 +173,7 @@ export default {
 
 .welcome-page{
     width: 70vh;
+    width: 100%;
     border-radius: 20px;
 }
 
