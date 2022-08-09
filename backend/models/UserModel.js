@@ -2,14 +2,11 @@
 const getDb = require('../utils/database').getDb
 
 class UserSchema {
-     constructor({name, email, phone, password, regionOfOrigin, division, subdivision}){
+     constructor({name, avatar, description, created_at}){
       this.name = name,
-      this.email = email,
-      this.phone = phone,
-      this.password = password,
-      this.regionOfOrigin = regionOfOrigin,
-      this.division = division,
-      this.subdivision = subdivision
+      this.avatar = avatar,
+      this.description = description,
+      this.created_at = created_at
     }
 
   save(){

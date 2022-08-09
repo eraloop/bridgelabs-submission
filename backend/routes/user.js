@@ -7,9 +7,9 @@ const router = express.Router()
 // const verifyUserAuth = require("../../../middlewares/verifyUserAuth")
 
 // controller imports 
-const loginUser = require("../../../controllers/users/login")
-const registerUser = require("../../../controllers/users/register")
-const logoutUser = require("../../../controllers/users/logoutUser")
+const loginUser = require("../controller/users/login")
+const registerUser = require("../controller/users/register")
+const logoutUser = require("../controller/users/logout")
 
 
 // routes

@@ -3,7 +3,7 @@ const router = express.Router()
 
 const getDb = require('../../utils/database').getDb
 const {hashPassword, generateJWT, generateRefreshToken }  = require('../../utils/token')
-const UserModel = require("../../models/users/UserModel").UserSchema
+const UserModel = require("../../models/UserModel").UserSchema
 
 
 const registerUser = async (req, res, next)=>{
