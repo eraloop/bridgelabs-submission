@@ -20,7 +20,7 @@ export default new Vuex.Store({
     user: TokenService.getCurrentUser(),
     categories:[],
     registrationLoginFailure: false,
-    loggedIn: '',
+    loggedIn: false,
     categoryCreated: false,
     loginError: {
       message: "",
