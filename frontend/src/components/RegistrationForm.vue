@@ -13,7 +13,7 @@
         <div class="form-section d-flex-column justify-content-center align-items-center  px-4">
             <section class="google-btn  d-flex align-items-center justify-content-center pt-4 pb-2">
                 <button class="d-flex align-items-center outline justify-content-center text-center px-5 py-2">
-                    <a :href="getGoogleUrl()" class="google-auth d-flex align-items-center outline justify-content-center text-center px-5 py-2">
+                    <a :href="getGoogleUrl" class="google-auth d-flex align-items-center outline justify-content-center text-center px-5 py-2">
                         <span><img src="../../static/images/google-brands.svg" alt=""  height="20px" width="20px"></span>
                         <span class="px-3 text-primary">Join with Google</span>
                     </a>
@@ -111,8 +111,8 @@ export default {
 
         getGoogleUrl: async() => {
 
-            const googleUser = await this.$gAuth.signIn()
-            console.log(googleUser)
+            // const googleUser = await this.$gAuth.signIn()
+            // console.log(googleUser)
             // const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
         
             // const options = {
