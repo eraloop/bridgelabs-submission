@@ -3,7 +3,6 @@ const UserModel = require("../models/UserModel")
 
 const loginUser = async ({email, password}) =>{
 
-
     const token = await generateJWT(userData)
     const refreshToken =  generateRefreshToken(userData)
 
