@@ -16,6 +16,8 @@ const routes = [
     name: 'register',
     component: RegistrationPage
   },
+
+  
   {
     path: '/login',
     name: 'login',
@@ -32,6 +34,7 @@ const routes = [
     name: 'create categories',
     component: CreateCategories
   },
+  
 ]
 
 const router = new VueRouter({
@@ -58,6 +61,13 @@ router.beforeEach((to, from, next) => {
       next('/home');
     }
   }
+
+  // if (to.fullPath === '/api/oauth/google') {
+  //   // if ((TokenService.getAccessToken())) {
+  //     next('/home');
+  //   // }
+  //   console.log(to)
+  // }
   
   next();
 }

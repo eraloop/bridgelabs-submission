@@ -21,6 +21,10 @@ p, small, div{
   font-family: 'Roboto', 'sans-serif';
 }
 
+button a{
+  text-decoration: none;
+  color: black;
+}
 
 .form-region{
     height: 90vh;
