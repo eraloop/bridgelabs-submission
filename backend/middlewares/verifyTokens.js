@@ -3,24 +3,43 @@ const jwt = require('jsonwebtoken')
 const {verifyJWT, refreshNewToken} = require('../utils/token')
 
 const getUser = require('../utils/getDbUser')
+const getDb = require('../utils/database').getDb
 
 const checkAndVerifyToken = (req, res, next) => {
 
     console.log("middleware activated")
 
-    let token = req.headers.token
-    console.log(token)
-    console.log(req.body)
-    console.log(req.headers)
-    if (!token) {
-        res.send("no token provided")
+    const token = req.body.token || req.query.token || req.headers["x-access-token"];
+
+    if (!token || token === '') return res,send("no token provided")
+
+    if (token.startsWith('Bearer')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length)
+        
+        // res.json({ res, message: 'No token provided', statusCode: 401 })
     }
-    // if (token.startsWith('Bearer')) {
-    //     // Remove Bearer from string
-    //     token = token.slice(7, token.length)
-    //     if (!token || token === '') res,send("no token provided")
-    //     // res.json({ res, message: 'No token provided', statusCode: 401 })
-    // }
+
+    if (!token) {
+        res.send("Token is required for authentication").status(400)
+    }
+    const db = getDb()
+    const blktokens = await db.collection('blacklist').find().toArray()
+
+    const match = blktokens.find(blk => { 
+        return blk === token
+    })
+
+    console.log(match)
+
+    if(match){
+        return res.json({
+            error: true,
+            message: "refresh token not valid, please login to get a new one",
+            status: 401
+        })
+    }
+
     console.log("next will verify jwt")
     // // call the verifyJWT method to verify the token is valid
     const result = verifyJWT(token)

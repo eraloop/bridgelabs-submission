@@ -8,7 +8,7 @@ const mongodb = require("mongodb")
 const cors = require("cors")
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
+const bodyparser = require('body-parser')
 // const port  = process.env.PORT
 
 // routes
@@ -24,9 +24,8 @@ app.use(cookieParser());
 app.use(express.json({
     limit: '50mb'
 }))
-app.use(bodyParser.json({
-    extended: true
-}));
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 app.use(cors({
     origin: '*',
     credentials: true
