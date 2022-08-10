@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-const { mongoConnect , saveUser } = require('./utils/database');
+const { mongoConnect } = require('./utils/database');
+const getDb  = require('./utils/database').getDb;
+
 const UserModel = require('./models/UserModel').UserSchema
+
 const path = require('path');
 
 const session = require('express-session');
@@ -70,15 +73,30 @@ app.get('/api/oauth/google',
     }
 
     console.log(userInfo)
+    
+   try{
+      const db = getDb()
+      const result = db.collection('users').findOne({"email" : userInfo.email}).then(result =>{
+        return result
+      })
+      console.log("result from db search", result)
+   }catch(e){
+    console.log(e)
+   }
+    
+    // if(result){
+    //   return res.send("User already exist with this email, please just logging")
+    // }
 
-    const user = new UserModel(userInfo)
-    const response = user.save()
 
-    console.log(response)
+    const user = new UserModel(userInfo) 
+    user.save()
 
-    // res.send(userInfo)
-    res.redirect('/result.html');
-    // return userInfo
+    // console.log(response)
+    // res.send("User account created., your info is shown below")
+    res.send(userInfo)
+    // res.redirect(__dirname + '/views/result.html');
+    return userInfo
 
   });
 

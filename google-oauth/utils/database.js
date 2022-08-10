@@ -24,14 +24,6 @@ const getDb = ()=>{
     throw 'No database found'
 }
 
-const saveUser = ()=>{
-    const db = getDb()
-    db.collection('users').insertOne(this).then(res=>{
-      console.log(res)
-    })
-}
-
 
 exports.mongoConnect = mongoConnect
 exports.getDb = getDb
-exports.saveUser = saveUser

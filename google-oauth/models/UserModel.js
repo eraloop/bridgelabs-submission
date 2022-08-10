@@ -17,7 +17,7 @@ class UserSchema {
 
   findUser(data){
     const db = getDb()
-    db.collection('user').find({"username" : data}).then(result =>{
+    db.collection('users').findOne({"email" : data}).then(result =>{
       console.log(result)
     })
   }
