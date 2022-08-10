@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const { mongoConnect , saveUser } = require('./utils/database');
+const UserModel = require('./models/UserModel').UserSchema
 const path = require('path');
 
 const session = require('express-session');
@@ -70,10 +71,14 @@ app.get('/api/oauth/google',
 
     console.log(userInfo)
 
-    saveUser(userInfo)
+    const user = new UserModel(userInfo)
+    const response = user.save()
 
-    res.send(userInfo)
-    return userInfo
+    console.log(response)
+
+    // res.send(userInfo)
+    res.redirect('/result.html');
+    // return userInfo
 
   });
 
