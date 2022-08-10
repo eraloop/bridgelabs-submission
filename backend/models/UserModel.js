@@ -2,11 +2,13 @@
 const getDb = require('../utils/database').getDb
 
 class UserSchema {
-     constructor({name, avatar, description, created_at}){
+
+     constructor({name, avatar, email, phone, password}){
       this.name = name,
       this.avatar = avatar,
-      this.description = description,
-      this.created_at = created_at
+      this.email = email
+      this.phone = phone
+      this.password = password
     }
 
   save(){
@@ -15,14 +17,6 @@ class UserSchema {
       console.log(res)
     })
   }
-
-  // findUser(data){
-  //   const db = getDb()
-  //   db.collection('user').find({"username" : data}).then(result =>{
-  //     console.log(result)
-  //   })
-  // }
-
 
 }
 

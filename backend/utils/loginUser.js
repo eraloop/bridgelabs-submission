@@ -1,7 +1,7 @@
 const {generateJWT, generateRefreshToken} = require('./token')
 const UserModel = require("../models/UserModel")
 
-const registerUser = async (userData) =>{
+const loginUser = async ({email, password}) =>{
 
     const token = await generateJWT(userData)
     const refreshToken =  generateRefreshToken(userData)
@@ -9,10 +9,12 @@ const registerUser = async (userData) =>{
     console.log(token , refreshToken)
 
     if((token === undefined || token === '') || (refreshToken === undefined || refreshToken === '')){
-        return res.json({
+        res.json({
             error: true,
-            message: "User creation failed, invalid token generation"
+            message: "login failed, invalid token returned"
         })
+
+        return false
     }
 
     const jwt = {
@@ -27,18 +29,26 @@ const registerUser = async (userData) =>{
         data: {
             name: userData.name,
             email: userData.email,
-            phone: userData.phone,
-            avatar: userData.avatar
         },
         token: jwt.token,
         refreshToken: jwt.refreshToken
     }
 
-    user.save()
-    res.cookie('token', jwt, {httpOnly: true})
-    res.status(200).send(response)
+    acc = getUser(email)
 
-    return true
+    const hash = acc[0].password
+    async function comparePassword(password, hash) {
+        const result = await bcrypt.compare(password, hash);
+        return result;
+    }
+
+    if(comparePassword(password, hash)){
+        res.send("credentials match").status(202)
+    }else{
+        res.send("credentials not valid").status(401)
+    }
+
+    next()
 }
 
-modules.exports = registerUser
+modules.exports = loginUser

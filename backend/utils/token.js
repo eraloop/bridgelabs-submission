@@ -10,19 +10,14 @@ const a = 'users'
 const saltRounds = 10
 const salt = bcrypt.genSaltSync(saltRounds)
 
-// const salt = genrateSalt = async () =>{
-//     const saltRounds = 10
-//     const salt = bcrypt.genSalt(saltRounds)
-// }
-
 const generateRefreshToken = (payload)=>{
 
     const signRefreshOptions = {
         issuer: i,
         subject: s,
         audience: a,
-        expiresIn: '72h',
-        algorithm: 'HS256',
+        expiresIn: '15min'
+        // algorithm: 'HS256',
     }
 
     const options = signRefreshOptions
@@ -130,7 +125,6 @@ const refreshNewToken = (token)=>{
 }
 
 const hashPassword = (password) => {
-    console.log(salt, password)
     const hash = bcrypt.hashSync(password, salt)
     return hash
 }
