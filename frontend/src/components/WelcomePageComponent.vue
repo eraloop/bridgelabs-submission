@@ -34,7 +34,7 @@
             </vuetable>
         </section>
 
-        <section v-if="showModal" class=" modal text-center d-flex align-items-center justify-content-center mx-auto">
+        <section v-if="showModal" class=" modal d-flex align-items-center justify-content-center mx-auto">
 
             <transition name="modal bg-secondary " >
                 <div class="modal-mask shadow-lg p-5">
@@ -51,7 +51,7 @@
                         </button>
                     </div>
 
-                    <div class="modal-body ">
+                    <div class="modal-body  text-start">
                         <slot name="body">
                             <form action="">
                                 <div class="py-1">
