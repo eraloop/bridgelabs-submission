@@ -1,5 +1,5 @@
 const {generateJWT, generateRefreshToken} = require('./token')
-const UserModel = require("../models/UserModel")
+const UserModel = require("../models/UserModel").UserSchema
 
 const registerUser = async (userData) =>{
 
@@ -34,11 +34,13 @@ const registerUser = async (userData) =>{
         refreshToken: jwt.refreshToken
     }
 
+    const user = new UserModel(userData)
+
     user.save()
-    res.cookie('token', jwt, {httpOnly: true})
-    res.status(200).send(response)
+    // res.cookie('token', jwt, {httpOnly: true})
+    // res.status(200).send(response)
 
     return true
 }
 
-modules.exports = registerUser
+module.exports = registerUser

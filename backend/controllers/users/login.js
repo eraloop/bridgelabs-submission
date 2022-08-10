@@ -1,13 +1,26 @@
-const {generateJWT, generateRefreshToken} = require('./token')
-const UserModel = require("../models/UserModel")
+const express = require('express')
+const router = express.Router()
+const bcrypt = require('bcrypt');
 
-const loginUser = async ({email, password}) =>{
 
+const {generateJWT, generateRefreshToken} = require('../../utils/token')
 
-    const token = await generateJWT(userData)
-    const refreshToken =  generateRefreshToken(userData)
+const getUser = require('../../utils/getDbUser')
 
-    console.log(token , refreshToken)
+const loginUser = async (req, res, next ) => {
+
+    const { phone , password } = req.body
+
+    if(phone === '' || password === ''){
+        res.json({
+            error: true,
+            message: "Credentials not complete"
+        })
+        return 
+    }
+
+    const token =  generateJWT({ phone , password })
+    const refreshToken =  generateRefreshToken({ phone , password })
 
     if((token === undefined || token === '') || (refreshToken === undefined || refreshToken === '')){
         res.json({
@@ -22,12 +35,12 @@ const loginUser = async ({email, password}) =>{
         refreshToken: refreshToken
     }
 
-    acc = getUser(email)
+    const acc = await getUser(phone)
 
     const hash = acc[0].password
 
     async function comparePassword(password, hash) {
-        const result = await bcrypt.compare(password, hash);
+        const result = bcrypt.compare(password, hash);
         return result;
     }
 
@@ -36,7 +49,7 @@ const loginUser = async ({email, password}) =>{
         statusText: "OK",
 
         data: {
-            email: email,
+            phone: phone,
         },
         token: jwt.token,
         refreshToken: jwt.refreshToken
@@ -50,9 +63,7 @@ const loginUser = async ({email, password}) =>{
         res.send("credentials not valid").status(401)
     }
 
-    
-
     next()
 }
 
-modules.exports = loginUser
+module.exports = loginUser
