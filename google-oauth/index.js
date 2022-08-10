@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const { mongoConnect , saveUser } = require('./utils/database');
+const path = require('path');
 
 const session = require('express-session');
 app.use(session({
@@ -8,8 +10,12 @@ app.use(session({
   secret: 'SECRET' 
 }));
 
+app.use(express.static(path.join(__dirname, '/public')));
+// app.use(express.static('views/images')); 
+
 
 const passport = require('passport');
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,7 +37,11 @@ const GOOGLE_CLIENT_SECRET = "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";
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/api/oauth/google"
+    callbackURL: "http://localhost:3000/api/oauth/google",
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ]
   },
 
   function(accessToken, refreshToken, profile, done) {
@@ -40,9 +50,9 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-// app.get('/', function(req, res) {
-//   res.render('pages/auth');
-// });
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/views/home.html');
+});
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
@@ -58,6 +68,10 @@ app.get('/api/oauth/google',
         avatar: userProfile.photos[0].value
     }
 
+    console.log(userInfo)
+
+    saveUser(userInfo)
+
     res.send(userInfo)
     return userInfo
 
@@ -66,4 +80,7 @@ app.get('/api/oauth/google',
 
 
 const port = process.env.PORT || 3000;
-app.listen(port , () => console.log('App listening on port ' + port)); 
+
+mongoConnect(()=>{
+  app.listen(port , () => console.log('App listening on port ' + port)); 
+})
