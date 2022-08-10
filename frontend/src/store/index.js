@@ -147,6 +147,34 @@ export default new Vuex.Store({
           return e
         }
       },
+
+      googleOauth (){
+
+        try{
+          
+          const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
+
+          const options = {
+              redirect_uri: "http://localhost:8080/api/oauth/google",
+              client_id: "585778916374-gqoboaih37s12pvmqhvvbija0dqphrqt.apps.googleusercontent.com",
+              access_type: 'offline',
+              response_type: 'code',
+              prompt: 'consent',
+              scope: [
+              'https://www.googleapis.com/auth/userinfo.profile',
+              'https://www.googleapis.com/auth/userinfo.email',
+              ].join(' '),
+              state: "/",
+          };
+
+          const qs = new URLSearchParams(options)
+
+          return `${rootUrl}?${qs.toString()}`
+
+        }catch(e){
+          return e
+        }
+      },
   
       async registerUser({ commit }, user) {
 
