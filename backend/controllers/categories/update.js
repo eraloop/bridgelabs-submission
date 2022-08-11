@@ -1,69 +1,48 @@
 const express = require('express')
-const router = express.Router()
-const bcrypt = require('bcrypt');
+var ObjectId = require('mongodb').ObjectId;
 
+const getDb = require('../../utils/database').getDb
 
-const {generateJWT, generateRefreshToken} = require('../../utils/token')
+const updateCategory = async (req, res, next ) => {
 
-const getUser = require('../../utils/getDbUser')
+    const id = req.params.id
 
-const loginUser = async (req, res, next ) => {
+    const updateData = {
+        title : req.body.title,
+        description: req.body.description,
+        avatar: req.body.avatar,
+        created_at: req.body.created_at,
+        update_at: req.body.created_at
+    }
 
-    const { phone , password } = req.body
+    const db = getDb()
 
-    if(phone === '' || password === ''){
-        res.json({
-            error: true,
-            message: "Credentials not complete"
+    try {
+        const result = db.collection("categories").updateOne( { "_id" : ObjectId(id) }, {$set: updateData}, { upsert: true } )
+        .then(res =>{
+            console.log(res)
         })
-        return 
-    }
 
-    const token =  generateJWT({ phone , password })
-    const refreshToken =  generateRefreshToken({ phone , password })
+        console.log(result)
 
-    if((token === undefined || token === '') || (refreshToken === undefined || refreshToken === '')){
-        res.json({
-            error: true,
-            message: "login failed, invalid token returned"
-        })
-        return false
-    }
+        const response = {
+            error: false,
+            status: 202,
+            statusText: "Accepted",
+        }
 
-    const jwt = {
-        token: token,
-        refreshToken: refreshToken
-    }
-
-    const acc = await getUser(phone)
-
-    const hash = acc[0].password
-
-    async function comparePassword(password, hash) {
-        const result = bcrypt.compare(password, hash);
-        return result;
-    }
-
-    const response = {
-        error: false,
-        statusText: "OK",
-
-        data: {
-            phone: phone,
-        },
-        token: jwt.token,
-        refreshToken: jwt.refreshToken
-    }
-
-    if(comparePassword(password, hash)){
-        // res.send("credentials match").status(202)
-        res.cookie('token', jwt, {httpOnly: true})
         res.status(200).send(response)
-    }else{
-        res.send("credentials not valid").status(401)
-    }
+
+     } catch (e) {
+        console.log(e);
+        return res.status(204).json({
+            error: true,
+            message: "Delete request failed, please verify the item identification"
+        })
+     }
+    
 
     next()
 }
 
-module.exports = loginUser
+module.exports = updateCategory

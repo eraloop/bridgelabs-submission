@@ -12,7 +12,7 @@ const deleteCategory = async (req, res, next ) => {
     const db = getDb()
 
     try {
-        const result = db.collection("categories").deleteOne( { "_id" : ObjectId(id) })
+        const result = db.collection("categories").deleteOne( { "_id" : ObjectId(id) }, { upsert: true } )
         .then(res =>{
             console.log(res)
         })
