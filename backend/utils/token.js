@@ -1,9 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-// const { ConnectionClosedEvent } = require('mongodb');
-const { TOKEN_PRIVATE_KEY , REFRESH_TOKEN_PRIVATE_KEY} = require('./config')
 
-const i = 'heritage'
+const i = 'bridgelabs'
 const s = 'jwt-node'
 const a = 'users'
 
@@ -16,7 +14,7 @@ const generateRefreshToken = (payload)=>{
         issuer: i,
         subject: s,
         audience: a,
-        expiresIn: '15min'
+        expiresIn: '120min'
         // algorithm: 'HS256',
     }
 
@@ -26,12 +24,12 @@ const generateRefreshToken = (payload)=>{
         delete options.expiresIn
     }
 
-    const refreshToken = jwt.sign(payload, REFRESH_TOKEN_PRIVATE_KEY, signRefreshOptions)
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_KEY, signRefreshOptions)
 
     return refreshToken
 }
 
-const generateJWT = async (payload) => {
+const generateJWT = (payload) => {
 
     try{
         const signJwtOptions = {
@@ -39,14 +37,14 @@ const generateJWT = async (payload) => {
             subject: s,
             audience: a,
             expiresIn: '15m',
-            algorithm: 'HS256',
+            // algorithm: 'HS256',
         }
     
         if (payload && payload.exp) {
             delete options.expiresIn
         }
     
-        const token = jwt.sign(payload, TOKEN_PRIVATE_KEY, signJwtOptions)
+        const token = jwt.sign(payload, process.env.TOKEN_KEY, signJwtOptions)
         return token
 
     }
@@ -70,10 +68,10 @@ const verifyJWT = (payload) => {
             subject: s,
             audience: a,
             expiresIn: '15m',
-            algorithm: 'HS256',
+            // algorithm: 'HS256',
         }
     
-        const result = jwt.verify(payload, TOKEN_PRIVATE_KEY, verifyJwtOptions)
+        const result = jwt.verify(payload, process.env.TOKEN_KEY, verifyJwtOptions)
         return result
     }
     catch(e){
@@ -91,10 +89,10 @@ const verifyRefreshToken = (payload) => {
         issuer: i,
         subject: s,
         audience: a,
-        expiresIn: '72h',
-        algorithm: 'HS256',
+        expiresIn: '15min',
+        // algorithm: 'HS256',
     }
-    return jwt.verify(payload, REFRESH_TOKEN_PRIVATE_KEY, verifyRefreshOptions)
+    return jwt.verify(payload, process.env.REFRESH_TOKEN_KEY, verifyRefreshOptions)
 }
 
 

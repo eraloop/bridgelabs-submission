@@ -1,10 +1,9 @@
 
-const Role = require('../../utils/roles')
-const getDb = require('../../utils/database').getDb
+const getDb = require('../utils/database').getDb
 
 class CategorySchema {
-  constructor({name, avatar, description, created_at}){
-    this.name = name,
+  constructor({title, avatar, description, created_at}){
+    this.title = title,
     this.avatar = avatar,
     this.description = description,
     this.created_at = created_at
@@ -14,8 +13,33 @@ class CategorySchema {
     const db = getDb()
     db.collection('categories').insertOne(this).then(res=>{
       console.log(res)
+      return res
     })
   }
+
+  // read(){
+  //   const db = getDb()
+  //   db.collection('categories').insertOne(this).then(res=>{
+  //     console.log(res)
+  //     return res
+  //   })
+  // }
+  
+  // update(){
+  //   const db = getDb()
+  //   db.collection('categories').insertOne(this).then(res=>{
+  //     console.log(res)
+  //     return res
+  //   })
+  // }
+
+  // delete(){
+  //   const db = getDb()
+  //   db.collection('categories').insertOne(this).then(res=>{
+  //     console.log(res)
+  //     return res
+  //   })
+  // }
 
 }
 
