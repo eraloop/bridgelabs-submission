@@ -9,7 +9,8 @@ const mongodb = require("mongodb")
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
 const bodyparser = require('body-parser')
-// const port  = process.env.PORT
+
+const port  = process.env.PORT || 3000
 
 // routes
 const users = require('./routes/user')
@@ -35,5 +36,5 @@ app.use('/api/category', categories)
 
 
 mongoConnect(()=>{
-    app.listen(3000)
+    app.listen(port)
 })
