@@ -27,8 +27,8 @@ const updateCategory = async (req, res, next ) => {
 
         const response = {
             error: false,
-            status: 202,
-            statusText: "Accepted",
+            status: 200,
+            statusText: "Item updated successfully",
         }
 
         res.status(200).send(response)
