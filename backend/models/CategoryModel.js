@@ -1,5 +1,5 @@
 
-const getDb = require('../../utils/database').getDb
+const getDb = require('../utils/database').getDb
 
 class CategorySchema {
   constructor({title, avatar, description, created_at}){

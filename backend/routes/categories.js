@@ -16,8 +16,8 @@ const updateCategory = require("../controllers/categories/update")
 // routes
 router.post('/create', createCategory )
 router.get('/read', readCategory )
-router.put(`/update/${id}`,  updateCategory )
-router.post(`/delete/${id}`, deleteCategory)
+router.put('/update/{id}',  updateCategory )
+router.delete('/delete/:id', deleteCategory)
 
 
 module.exports = router

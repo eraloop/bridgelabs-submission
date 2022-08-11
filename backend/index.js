@@ -13,7 +13,7 @@ const bodyparser = require('body-parser')
 
 // routes
 const users = require('./routes/user')
-// const categories = require('./routes/categories')
+const categories = require('./routes/categories')
 
 // db connection
 const { mongoConnect } = require('./utils/database')
@@ -31,7 +31,7 @@ app.use(bodyparser.json());
 
 // routes
 app.use('/api/user', users)
-// app.use('/user', categories)
+app.use('/api/category', categories)
 
 
 mongoConnect(()=>{

@@ -8,7 +8,7 @@ const CategoryModel = require("../../models/CategoryModel").CategorySchema
 const createCategory = async (req, res, next ) => {
 
     if((req.body.title === '') || (req.body.description === '') || (req.body.avatar === '') || (req.body.created_at === '')){
-        return res.json({
+        return res.status(400).json({
             error: true,
             message: "Category information not complete, please carefully provide the information required",
             status : 400
