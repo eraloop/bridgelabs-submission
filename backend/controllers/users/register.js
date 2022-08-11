@@ -129,10 +129,9 @@ const register = async (req, res, next)=>{
             }
         
             const user = new UserModel(userData)
-        
             user.save()
 
-            
+
             res.cookie('token', jwt, {httpOnly: true})
             res.status(200).send(response)
         
