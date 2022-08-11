@@ -1,6 +1,6 @@
 const express = require('express')
-const router = express.Router()
-const bcrypt = require('bcrypt');
+
+var ObjectId = require('mongodb').ObjectId;
 
 const getDb = require("../../utils/database").getDb
 
@@ -10,21 +10,31 @@ const deleteCategory = async (req, res, next ) => {
     console.log(id)
 
     const db = getDb()
-    const result = await db.collection('categories').deleteOne({_id: id})
 
-    // categories.forEach(cat=>{
-    //     return cat.id != id
-    // })
-    console.log(result)
+    try {
+        const result = db.collection("categories").deleteOne( { "_id" : ObjectId(id) })
+        .then(res =>{
+            console.log(res)
+        })
+
+        console.log(result)
+
+        const response = {
+            error: false,
+            status: 202,
+            statusText: "Accepted",
+        }
+
+        res.status(200).send(response)
+
+     } catch (e) {
+        console.log(e);
+        return res.status(204).json({
+            error: true,
+            message: "Delete request failed, please verify the item identification"
+        })
+     }
     
-    // const response = {
-    //     error: false,
-    //     status: 201,
-    //     statusText: "created",
-    //     data: categories,
-    // }
-
-    // res.status(200).send(response)
 
     next()
 }
